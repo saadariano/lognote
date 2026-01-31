@@ -30,36 +30,58 @@
             min-height: 90vh;
         }
 
-        /* Language Switcher */
+        /* Language Dropdown */
         .language-switcher {
             position: fixed;
             top: 20px;
             right: 20px;
             z-index: 1000;
-            background: white;
-            border-radius: 10px;
-            padding: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            display: flex;
-            gap: 10px;
         }
 
-        .lang-btn {
-            padding: 8px 12px;
-            border: 2px solid #e9ecef;
+        .lang-current {
             background: white;
-            border-radius: 8px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 10px 15px;
             cursor: pointer;
             font-size: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .lang-current:hover {
+            border-color: #667eea;
+        }
+
+        .lang-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 5px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .lang-dropdown.active {
+            display: block;
+        }
+
+        .lang-option {
+            padding: 10px 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
             transition: all 0.3s;
         }
 
-        .lang-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .lang-btn.active {
-            border-color: #667eea;
+        .lang-option:hover {
             background: #f0f3ff;
         }
 
@@ -170,6 +192,20 @@
             grid-column: 1 / -1;
         }
 
+        .btn-favorites:hover {
+            background: #ffb300;
+        }
+
+        .btn-back {
+            background: #28a745;
+            color: white;
+            grid-column: 1 / -1;
+        }
+
+        .btn-back:hover {
+            background: #218838;
+        }
+
         .notes-list {
             max-height: calc(90vh - 500px);
             overflow-y: auto;
@@ -194,6 +230,10 @@
         .note-item.active {
             border-color: #667eea;
             background: #f0f3ff;
+        }
+
+        .note-item.archived {
+            opacity: 0.6;
         }
 
         .note-item h3 {
@@ -232,8 +272,38 @@
             padding: 2px;
         }
 
-        .note-icon-btn:hover {
-            transform: scale(1.2);
+        .note-actions {
+            display: flex;
+            gap: 5px;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .note-action-btn {
+            flex: 1;
+            padding: 5px 8px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .note-action-edit {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .note-action-delete {
+            background: #dc3545;
+            color: white;
+        }
+
+        .note-action-archive {
+            background: #6c757d;
+            color: white;
         }
 
         .editor-section {
@@ -319,11 +389,6 @@
             border-color: #667eea;
         }
 
-        .highlight {
-            background-color: yellow;
-            font-weight: bold;
-        }
-
         .editor-footer {
             display: flex;
             justify-content: space-between;
@@ -347,16 +412,53 @@
 
         .bottom-btn {
             padding: 8px 15px;
-            background: #6c757d;
             color: white;
             border: none;
             border-radius: 6px;
             cursor: pointer;
             font-size: 12px;
+            font-weight: 600;
         }
 
-        .bottom-btn:hover {
+        .btn-delete {
+            background: #dc3545;
+        }
+
+        .btn-delete:hover {
+            background: #c82333;
+        }
+
+        .btn-reminder {
+            background: #ffc107;
+            color: #000;
+        }
+
+        .btn-reminder:hover {
+            background: #e0a800;
+        }
+
+        .btn-lock {
+            background: #6c757d;
+        }
+
+        .btn-lock:hover {
             background: #5a6268;
+        }
+
+        .btn-history {
+            background: #17a2b8;
+        }
+
+        .btn-history:hover {
+            background: #138496;
+        }
+
+        .btn-pdf {
+            background: #e83e8c;
+        }
+
+        .btn-pdf:hover {
+            background: #d63384;
         }
 
         .save-btn {
@@ -474,7 +576,7 @@
             transform: translateY(0);
         }
 
-        /* Statistics - Styled like the image */
+        /* Statistics Card */
         .statistics-card {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 20px;
@@ -556,6 +658,11 @@
             margin-bottom: 10px;
             border-radius: 8px;
             border-left: 3px solid #667eea;
+            cursor: pointer;
+        }
+
+        .history-item:hover {
+            background: #e9ecef;
         }
 
         .history-time {
@@ -587,6 +694,17 @@
             color: #eee;
         }
 
+        .highlight {
+            background-color: yellow;
+            font-weight: bold;
+            animation: pulse 0.5s;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
         @media (max-width: 768px) {
             .container {
                 grid-template-columns: 1fr;
@@ -595,10 +713,23 @@
     </style>
 </head>
 <body>
-    <!-- Language Switcher -->
+    <!-- Language Dropdown -->
     <div class="language-switcher">
-        <button class="lang-btn active" onclick="switchLanguage('en')" id="lang-en">🇬🇧 EN</button>
-        <button class="lang-btn" onclick="switchLanguage('it')" id="lang-it">🇮🇹 IT</button>
+        <div class="lang-current" onclick="toggleLanguageDropdown()">
+            <span id="currentLangFlag">🇬🇧</span>
+            <span id="currentLangText">English</span>
+            <span>▼</span>
+        </div>
+        <div class="lang-dropdown" id="langDropdown">
+            <div class="lang-option" onclick="switchLanguage('en')">
+                <span>🇬🇧</span>
+                <span>English</span>
+            </div>
+            <div class="lang-option" onclick="switchLanguage('it')">
+                <span>🇮🇹</span>
+                <span>Italiano</span>
+            </div>
+        </div>
     </div>
 
     <div class="container">
@@ -625,13 +756,13 @@
                     <span>➕</span>
                     <span data-lang="newNote">New Note</span>
                 </button>
-                <button class="btn btn-favorites" onclick="showFavorites()">
+                <button class="btn btn-favorites" id="favoritesBtn" onclick="showFavorites()">
                     <span>⭐</span>
                     <span data-lang="favorites">Favorites</span>
                 </button>
-                <button class="btn btn-secondary" onclick="sortNotes()">
-                    <span>🔄</span>
-                    <span data-lang="sort">Sort</span>
+                <button class="btn btn-secondary" onclick="showArchive()">
+                    <span>📦</span>
+                    <span data-lang="archive">Archive</span>
                 </button>
                 <button class="btn btn-secondary" onclick="showCalendar()">
                     <span>📅</span>
@@ -732,18 +863,28 @@
                 </button>
             </div>
 
-            <!-- Bottom Toolbar -->
+            <!-- Bottom Toolbar with Colored Buttons -->
             <div class="bottom-toolbar">
-                <button class="bottom-btn" onclick="showDeleteModal()">🗑️ <span data-lang="delete">Delete</span></button>
-                <button class="bottom-btn" onclick="addReminder()">⏰ <span data-lang="reminder">Reminder</span></button>
-                <button class="bottom-btn" onclick="showLockModal()">🔒 <span data-lang="lock">Lock</span></button>
-                <button class="bottom-btn" onclick="showHistory()">📜 <span data-lang="history">History</span></button>
-                <button class="bottom-btn" onclick="exportToPDF()">📄 PDF</button>
+                <button class="bottom-btn btn-delete" onclick="showDeleteModal()">
+                    🗑️ <span data-lang="delete">Delete</span>
+                </button>
+                <button class="bottom-btn btn-reminder" onclick="addReminder()">
+                    ⏰ <span data-lang="reminder">Reminder</span>
+                </button>
+                <button class="bottom-btn btn-lock" onclick="showLockModal()">
+                    🔒 <span data-lang="lock">Lock</span>
+                </button>
+                <button class="bottom-btn btn-history" onclick="showHistory()">
+                    📜 <span data-lang="history">History</span>
+                </button>
+                <button class="bottom-btn btn-pdf" onclick="exportToPDF()">
+                    📄 PDF
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- New Note Modal -->
+    <!-- Modals -->
     <div class="modal" id="newNoteModal">
         <div class="modal-content">
             <div class="modal-header" data-lang="createNewNote">Create New Note</div>
@@ -758,7 +899,6 @@
         </div>
     </div>
 
-    <!-- Delete Password Modal -->
     <div class="modal" id="passwordModal">
         <div class="modal-content">
             <div class="modal-header" data-lang="enterPassword">Enter Password to Delete</div>
@@ -773,7 +913,6 @@
         </div>
     </div>
 
-    <!-- Lock Modal -->
     <div class="modal" id="lockModal">
         <div class="modal-content">
             <div class="modal-header" data-lang="setLock">Set Personal Lock</div>
@@ -789,7 +928,6 @@
         </div>
     </div>
 
-    <!-- Unlock Modal -->
     <div class="modal" id="unlockModal">
         <div class="modal-content">
             <div class="modal-header" data-lang="unlockNote">Unlock Note</div>
@@ -804,7 +942,6 @@
         </div>
     </div>
 
-    <!-- Tags Modal -->
     <div class="modal" id="tagModal">
         <div class="modal-content">
             <div class="modal-header" data-lang="addTags">Add Tags</div>
@@ -821,7 +958,6 @@
         </div>
     </div>
 
-    <!-- Import Modal -->
     <div class="modal" id="importModal">
         <div class="modal-content">
             <div class="modal-header" data-lang="enterImportPassword">Enter Password to Import</div>
@@ -837,7 +973,6 @@
         </div>
     </div>
 
-    <!-- History Modal -->
     <div class="modal" id="historyModal">
         <div class="modal-content">
             <div class="modal-header" data-lang="noteHistory">Note History</div>
@@ -848,7 +983,6 @@
         </div>
     </div>
 
-    <!-- Calendar Modal -->
     <div class="modal" id="calendarModal">
         <div class="modal-content">
             <div class="modal-header" data-lang="calendar">Calendar</div>
@@ -859,7 +993,6 @@
         </div>
     </div>
 
-    <!-- Toast -->
     <div class="toast" id="toast"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -871,7 +1004,8 @@
                 allAuthors: "All Authors",
                 newNote: "New Note",
                 favorites: "Favorites",
-                sort: "Sort",
+                backToAll: "Back to All Notes",
+                archive: "Archive",
                 calendar: "Calendar",
                 export: "Export",
                 import: "Import",
@@ -894,6 +1028,8 @@
                 reminder: "Reminder",
                 lock: "Lock",
                 history: "History",
+                edit: "Edit",
+                archiveBtn: "Archive",
                 createNewNote: "Create New Note",
                 authorName: "Your name",
                 noteTitle: "Note title",
@@ -914,10 +1050,12 @@
                 currentTags: "Current tags:",
                 noteHistory: "Note History",
                 fillAllFields: "⚠️ Please fill in all fields",
-                noteCreated: "📝 Note created successfully!",
-                noteSaved: "💾 Note saved successfully!",
+                noteCreated: "📝 Note created!",
+                noteSaved: "💾 Note saved!",
                 selectNote: "⚠️ Please select a note first",
-                noteDeleted: "🗑️ Note deleted successfully!",
+                noteDeleted: "🗑️ Note deleted!",
+                noteArchived: "📦 Note archived!",
+                noteUnarchived: "📤 Note unarchived!",
                 noteLocked: "🔒 Note locked!",
                 noteUnlocked: "🔓 Note unlocked!",
                 passwordsDontMatch: "❌ Passwords don't match!",
@@ -927,7 +1065,7 @@
                 allNotesExported: "📤 All notes exported!",
                 pdfExported: "📄 PDF exported!",
                 showingFavorites: "⭐ Showing favorites",
-                showingAllNotes: "📝 Showing all notes"
+                showingArchive: "📦 Showing archive"
             },
             it: {
                 subtitle: "Registro Processi di Saad",
@@ -935,7 +1073,8 @@
                 allAuthors: "Tutti gli Autori",
                 newNote: "Nuova Nota",
                 favorites: "Preferiti",
-                sort: "Ordina",
+                backToAll: "Torna a Tutte le Note",
+                archive: "Archivio",
                 calendar: "Calendario",
                 export: "Esporta",
                 import: "Importa",
@@ -958,6 +1097,8 @@
                 reminder: "Promemoria",
                 lock: "Blocca",
                 history: "Cronologia",
+                edit: "Modifica",
+                archiveBtn: "Archivia",
                 createNewNote: "Crea Nuova Nota",
                 authorName: "Il tuo nome",
                 noteTitle: "Titolo della nota",
@@ -971,7 +1112,7 @@
                 password: "Password",
                 confirmPassword: "Conferma password",
                 wrongPassword: "Password errata!",
-                setLock: "Imposta Blocco Personale",
+                setLock: "Imposta Blocco",
                 unlockNote: "Sblocca Nota",
                 addTags: "Aggiungi Tag",
                 tagsPlaceholder: "Inserisci tag separati da virgole",
@@ -982,6 +1123,8 @@
                 noteSaved: "💾 Nota salvata!",
                 selectNote: "⚠️ Seleziona prima una nota",
                 noteDeleted: "🗑️ Nota eliminata!",
+                noteArchived: "📦 Nota archiviata!",
+                noteUnarchived: "📤 Nota estratta!",
                 noteLocked: "🔒 Nota bloccata!",
                 noteUnlocked: "🔓 Nota sbloccata!",
                 passwordsDontMatch: "❌ Le password non corrispondono!",
@@ -991,7 +1134,20 @@
                 allNotesExported: "📤 Note esportate!",
                 pdfExported: "📄 PDF esportato!",
                 showingFavorites: "⭐ Mostrando preferiti",
-                showingAllNotes: "📝 Mostrando tutte"
+                showingArchive: "📦 Mostrando archivio"
+            }
+        };
+
+        const templates = {
+            en: {
+                note: `\n📝 NOTE\n========================\nDate: DATE_PLACEHOLDER\nTime: TIME_PLACEHOLDER\n\nWrite your note here...\n\n`,
+                instructions: `\n📖 INSTRUCTIONS\n========================\nTask: \nDate: DATE_PLACEHOLDER\n\nSTEPS:\n1. Open Atritor program\n2. \n3. \n4. \n\nIMPORTANT:\n⚠️ \n\n`,
+                checklist: `\n✅ CHECKLIST\n========================\nDate: DATE_PLACEHOLDER\n\n☐ \n☐ \n☐ \n☐ \n\n`
+            },
+            it: {
+                note: `\n📝 NOTA\n========================\nData: DATE_PLACEHOLDER\nOra: TIME_PLACEHOLDER\n\nScrivi la tua nota qui...\n\n`,
+                instructions: `\n📖 ISTRUZIONI\n========================\nAttività: \nData: DATE_PLACEHOLDER\n\nPASSAGGI:\n1. Apri il programma Atritor\n2. \n3. \n4. \n\nIMPORTANTE:\n⚠️ \n\n`,
+                checklist: `\n✅ LISTA DI CONTROLLO\n========================\nData: DATE_PLACEHOLDER\n\n☐ \n☐ \n☐ \n☐ \n\n`
             }
         };
 
@@ -1000,12 +1156,23 @@
         let currentNoteId = null;
         let noteToDelete = null;
         let showingFavoritesOnly = false;
-        let currentSortOrder = 'date';
+        let showingArchiveOnly = false;
+
+        function toggleLanguageDropdown() {
+            document.getElementById('langDropdown').classList.toggle('active');
+        }
 
         function switchLanguage(lang) {
             currentLang = lang;
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            document.getElementById(`lang-${lang}`).classList.add('active');
+            document.getElementById('langDropdown').classList.remove('active');
+            
+            if (lang === 'en') {
+                document.getElementById('currentLangFlag').textContent = '🇬🇧';
+                document.getElementById('currentLangText').textContent = 'English';
+            } else {
+                document.getElementById('currentLangFlag').textContent = '🇮🇹';
+                document.getElementById('currentLangText').textContent = 'Italiano';
+            }
 
             document.querySelectorAll('[data-lang]').forEach(el => {
                 el.textContent = translations[lang][el.getAttribute('data-lang')];
@@ -1053,26 +1220,44 @@
 
         function filterByAuthor() {
             showingFavoritesOnly = false;
+            showingArchiveOnly = false;
+            updateFavoritesButton();
             renderNotesList();
         }
 
         function showFavorites() {
             showingFavoritesOnly = !showingFavoritesOnly;
+            showingArchiveOnly = false;
             document.getElementById('authorFilter').value = '';
+            updateFavoritesButton();
             renderNotesList();
-            showToast(showingFavoritesOnly ? translations[currentLang].showingFavorites : translations[currentLang].showingAllNotes);
+            showToast(showingFavoritesOnly ? translations[currentLang].showingFavorites : '');
         }
 
-        function sortNotes() {
-            currentSortOrder = currentSortOrder === 'date' ? 'alpha' : 'date';
+        function updateFavoritesButton() {
+            const btn = document.getElementById('favoritesBtn');
+            if (showingFavoritesOnly) {
+                btn.className = 'btn btn-back';
+                btn.innerHTML = `<span>◀</span><span data-lang="backToAll">${translations[currentLang].backToAll}</span>`;
+            } else {
+                btn.className = 'btn btn-favorites';
+                btn.innerHTML = `<span>⭐</span><span data-lang="favorites">${translations[currentLang].favorites}</span>`;
+            }
+        }
+
+        function showArchive() {
+            showingArchiveOnly = !showingArchiveOnly;
+            showingFavoritesOnly = false;
+            document.getElementById('authorFilter').value = '';
+            updateFavoritesButton();
             renderNotesList();
+            showToast(showingArchiveOnly ? translations[currentLang].showingArchive : '');
         }
 
         function showNewNoteModal() {
             document.getElementById('newNoteModal').classList.add('active');
             document.getElementById('newNoteAuthor').value = '';
             document.getElementById('newNoteTitle').value = '';
-            document.getElementById('newNoteAuthor').focus();
         }
 
         function closeNewNoteModal() {
@@ -1098,6 +1283,7 @@
                 tags: [],
                 favorite: false,
                 pinned: false,
+                archived: false,
                 color: '#ffffff',
                 locked: false,
                 lockPassword: '',
@@ -1121,25 +1307,25 @@
                 filteredNotes = notes.filter(n => n.author === authorFilter);
             }
             if (showingFavoritesOnly) {
-                filteredNotes = filteredNotes.filter(n => n.favorite);
+                filteredNotes = filteredNotes.filter(n => n.favorite && !n.archived);
+            }
+            if (showingArchiveOnly) {
+                filteredNotes = filteredNotes.filter(n => n.archived);
+            } else {
+                filteredNotes = filteredNotes.filter(n => !n.archived);
             }
             
             const sortedNotes = [...filteredNotes].sort((a, b) => {
                 if (a.pinned && !b.pinned) return -1;
                 if (!a.pinned && b.pinned) return 1;
-                
-                if (currentSortOrder === 'alpha') {
-                    return a.title.localeCompare(b.title);
-                } else {
-                    return new Date(b.updatedAt) - new Date(a.updatedAt);
-                }
+                return new Date(b.updatedAt) - new Date(a.updatedAt);
             });
 
             container.innerHTML = sortedNotes.map(note => {
                 const preview = note.content.substring(0, 50);
                 const date = new Date(note.updatedAt).toLocaleDateString();
                 return `
-                    <div class="note-item ${note.id === currentNoteId ? 'active' : ''}" 
+                    <div class="note-item ${note.id === currentNoteId ? 'active' : ''} ${note.archived ? 'archived' : ''}" 
                          onclick="selectNote(${note.id})"
                          style="background: ${note.color};">
                         <div class="note-icons">
@@ -1156,6 +1342,17 @@
                         <div class="note-meta">
                             <span>👤 ${note.author}</span>
                             <span>📅 ${date}</span>
+                        </div>
+                        <div class="note-actions">
+                            <button class="note-action-btn note-action-edit" onclick="event.stopPropagation(); selectNote(${note.id})">
+                                ${translations[currentLang].edit}
+                            </button>
+                            <button class="note-action-btn note-action-delete" onclick="event.stopPropagation(); deleteNoteFromList(${note.id})">
+                                ${translations[currentLang].delete}
+                            </button>
+                            <button class="note-action-btn note-action-archive" onclick="event.stopPropagation(); toggleArchive(${note.id})">
+                                ${note.archived ? '📤' : '📦'}
+                            </button>
                         </div>
                     </div>
                 `;
@@ -1178,6 +1375,21 @@
                 saveNotes();
                 renderNotesList();
             }
+        }
+
+        function toggleArchive(id) {
+            const note = notes.find(n => n.id === id);
+            if (note) {
+                note.archived = !note.archived;
+                saveNotes();
+                renderNotesList();
+                showToast(note.archived ? translations[currentLang].noteArchived : translations[currentLang].noteUnarchived);
+            }
+        }
+
+        function deleteNoteFromList(id) {
+            noteToDelete = id;
+            showDeleteModal();
         }
 
         function selectNote(id) {
@@ -1205,6 +1417,18 @@
             renderNotesList();
         }
 
+        function clearEditor() {
+            currentNoteId = null;
+            document.getElementById('noteTitle').value = '';
+            document.getElementById('noteContent').value = '';
+            document.getElementById('noteTitle').disabled = true;
+            document.getElementById('noteContent').disabled = true;
+            document.getElementById('saveBtn').disabled = true;
+            document.getElementById('currentColor').style.background = 'white';
+            document.getElementById('noteContent').style.background = 'white';
+            renderNotesList();
+        }
+
         function saveCurrentNote() {
             if (!currentNoteId) {
                 showToast(translations[currentLang].selectNote);
@@ -1213,7 +1437,6 @@
 
             const note = notes.find(n => n.id === currentNoteId);
             if (note) {
-                // Save to history
                 if (!note.history) note.history = [];
                 note.history.push({
                     content: note.content,
@@ -1226,17 +1449,17 @@
                 note.content = document.getElementById('noteContent').value;
                 note.updatedAt = new Date().toISOString();
                 saveNotes();
-                renderNotesList();
                 showToast(translations[currentLang].noteSaved);
+                clearEditor();
             }
         }
 
         function showDeleteModal() {
-            if (!currentNoteId) {
+            if (!noteToDelete && !currentNoteId) {
                 showToast(translations[currentLang].selectNote);
                 return;
             }
-            noteToDelete = currentNoteId;
+            if (!noteToDelete) noteToDelete = currentNoteId;
             document.getElementById('passwordModal').classList.add('active');
             document.getElementById('deletePassword').value = '';
             document.getElementById('deleteError').classList.remove('show');
@@ -1258,13 +1481,10 @@
             if (noteToDelete) {
                 notes = notes.filter(n => n.id !== noteToDelete);
                 saveNotes();
+                if (currentNoteId === noteToDelete) {
+                    clearEditor();
+                }
                 renderNotesList();
-                currentNoteId = null;
-                document.getElementById('noteTitle').value = '';
-                document.getElementById('noteContent').value = '';
-                document.getElementById('noteTitle').disabled = true;
-                document.getElementById('noteContent').disabled = true;
-                document.getElementById('saveBtn').disabled = true;
                 closePasswordModal();
                 showToast(translations[currentLang].noteDeleted);
             }
@@ -1272,19 +1492,11 @@
 
         function addTemplate(type) {
             const content = document.getElementById('noteContent');
-            let template = '';
+            let template = templates[currentLang][type];
             
-            switch(type) {
-                case 'note':
-                    template = `\n📝 NOTE\n========================\nDate: ${new Date().toLocaleDateString()}\nTime: ${new Date().toLocaleTimeString()}\n\nWrite your note here...\n\n`;
-                    break;
-                case 'instructions':
-                    template = `\n📖 INSTRUCTIONS\n========================\nTask: \nDate: ${new Date().toLocaleDateString()}\n\nSTEPS:\n1. \n2. \n3. \n\nIMPORTANT:\n⚠️ \n\n`;
-                    break;
-                case 'checklist':
-                    template = `\n✅ CHECKLIST\n========================\nDate: ${new Date().toLocaleDateString()}\n\n☐ \n☐ \n☐ \n☐ \n\n`;
-                    break;
-            }
+            const now = new Date();
+            template = template.replace('DATE_PLACEHOLDER', now.toLocaleDateString());
+            template = template.replace('TIME_PLACEHOLDER', now.toLocaleTimeString());
             
             content.value += template;
             updateWordCount();
@@ -1301,9 +1513,9 @@
 
         function addReminder() {
             const content = document.getElementById('noteContent');
-            const reminder = prompt('Set a reminder:');
+            const reminder = prompt(currentLang === 'en' ? 'Set a reminder:' : 'Imposta promemoria:');
             if (reminder) {
-                const reminderText = `\n⏰ REMINDER: ${reminder}\nSet on: ${new Date().toLocaleString()}\n`;
+                const reminderText = `\n⏰ ${currentLang === 'en' ? 'REMINDER' : 'PROMEMORIA'}: ${reminder}\n${currentLang === 'en' ? 'Set on' : 'Impostato il'}: ${new Date().toLocaleString()}\n`;
                 content.value += reminderText;
                 updateWordCount();
                 showToast(translations[currentLang].reminderAdded);
@@ -1349,11 +1561,7 @@
                 renderNotesList();
                 closeLockModal();
                 showToast(translations[currentLang].noteLocked);
-                
-                // Lock the editor
-                document.getElementById('noteTitle').disabled = true;
-                document.getElementById('noteContent').disabled = true;
-                document.getElementById('saveBtn').disabled = true;
+                clearEditor();
             }
         }
 
@@ -1476,7 +1684,7 @@
                     <head>
                         <title>${note.title}</title>
                         <style>
-                            body { font-family: Arial, sans-serif; padding: 40px; }
+                            body { font-family: Arial; padding: 40px; }
                             h1 { color: #667eea; }
                             .meta { color: #6c757d; margin-bottom: 20px; }
                             .content { line-height: 1.8; white-space: pre-wrap; }
@@ -1522,8 +1730,6 @@
                 
                 doc.save(`${note.title}.pdf`);
                 showToast(translations[currentLang].pdfExported);
-            } else {
-                showToast('❌ PDF library not loaded');
             }
         }
 
@@ -1609,24 +1815,11 @@
 
         function searchNotes() {
             const query = document.getElementById('searchInput').value.toLowerCase();
-            const content = document.getElementById('noteContent');
             
-            if (!query) {
-                content.innerHTML = content.value;
-                return;
-            }
-
-            // Vibrate if supported
-            if (navigator.vibrate) {
+            if (navigator.vibrate && query) {
                 navigator.vibrate(50);
             }
-
-            // Highlight search results in yellow
-            const text = content.value;
-            const regex = new RegExp(`(${query})`, 'gi');
-            const highlighted = text.replace(regex, '<span class="highlight">$1</span>');
             
-            // Note: For textarea we can't use HTML, but we show matching notes
             const authorFilter = document.getElementById('authorFilter').value;
             
             let filtered = notes.filter(note => 
@@ -1640,25 +1833,36 @@
             }
 
             if (showingFavoritesOnly) {
-                filtered = filtered.filter(n => n.favorite);
+                filtered = filtered.filter(n => n.favorite && !n.archived);
+            }
+
+            if (showingArchiveOnly) {
+                filtered = filtered.filter(n => n.archived);
+            } else {
+                filtered = filtered.filter(n => !n.archived);
             }
 
             const container = document.getElementById('notesList');
             const sortedNotes = [...filtered].sort((a, b) => {
                 if (a.pinned && !b.pinned) return -1;
                 if (!a.pinned && b.pinned) return 1;
-                if (currentSortOrder === 'alpha') {
-                    return a.title.localeCompare(b.title);
-                } else {
-                    return new Date(b.updatedAt) - new Date(a.updatedAt);
-                }
+                return new Date(b.updatedAt) - new Date(a.updatedAt);
             });
 
             container.innerHTML = sortedNotes.map(note => {
-                const preview = note.content.substring(0, 50);
+                let preview = note.content.substring(0, 50);
+                let titleDisplay = note.title;
+                
+                // Highlight search term in yellow
+                if (query) {
+                    const regex = new RegExp(`(${query})`, 'gi');
+                    preview = preview.replace(regex, '<span class="highlight">$1</span>');
+                    titleDisplay = titleDisplay.replace(regex, '<span class="highlight">$1</span>');
+                }
+                
                 const date = new Date(note.updatedAt).toLocaleDateString();
                 return `
-                    <div class="note-item ${note.id === currentNoteId ? 'active' : ''}" 
+                    <div class="note-item ${note.id === currentNoteId ? 'active' : ''} ${note.archived ? 'archived' : ''}" 
                          onclick="selectNote(${note.id})"
                          style="background: ${note.color};">
                         <div class="note-icons">
@@ -1670,11 +1874,22 @@
                             </button>
                             ${note.locked ? '<span>🔒</span>' : ''}
                         </div>
-                        <h3>${note.title}</h3>
+                        <h3>${titleDisplay}</h3>
                         <p>${preview}${note.content.length > 50 ? '...' : ''}</p>
                         <div class="note-meta">
                             <span>👤 ${note.author}</span>
                             <span>📅 ${date}</span>
+                        </div>
+                        <div class="note-actions">
+                            <button class="note-action-btn note-action-edit" onclick="event.stopPropagation(); selectNote(${note.id})">
+                                ${translations[currentLang].edit}
+                            </button>
+                            <button class="note-action-btn note-action-delete" onclick="event.stopPropagation(); deleteNoteFromList(${note.id})">
+                                ${translations[currentLang].delete}
+                            </button>
+                            <button class="note-action-btn note-action-archive" onclick="event.stopPropagation(); toggleArchive(${note.id})">
+                                ${note.archived ? '📤' : '📦'}
+                            </button>
                         </div>
                     </div>
                 `;
@@ -1740,7 +1955,7 @@
         }
 
         function updateStats() {
-            document.getElementById('totalNotes').textContent = notes.length;
+            document.getElementById('totalNotes').textContent = notes.filter(n => !n.archived).length;
             const favorites = notes.filter(n => n.favorite).length;
             document.getElementById('totalFavorites').textContent = favorites;
             const totalWords = notes.reduce((sum, note) => {
@@ -1758,6 +1973,7 @@
         }
 
         function showToast(message) {
+            if (!message) return;
             const toast = document.getElementById('toast');
             toast.textContent = message;
             toast.classList.add('show');
@@ -1808,6 +2024,13 @@
 
         document.getElementById('newNoteTitle').addEventListener('keypress', (e) => {
             if (e.key === 'Enter') createNoteWithDetails();
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.language-switcher')) {
+                document.getElementById('langDropdown').classList.remove('active');
+            }
         });
 
         loadNotes();
