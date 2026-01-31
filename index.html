@@ -36,6 +36,7 @@
             top: 20px;
             right: 20px;
             z-index: 1000;
+            font-family: "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", "Apple Color Emoji", sans-serif;
         }
 
         .lang-current {
@@ -44,7 +45,6 @@
             border-radius: 10px;
             padding: 10px 15px;
             cursor: pointer;
-            font-size: 20px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             display: flex;
             align-items: center;
@@ -716,18 +716,18 @@
     <!-- Language Dropdown -->
     <div class="language-switcher">
         <div class="lang-current" onclick="toggleLanguageDropdown()">
-            <span id="currentLangFlag">🇬🇧</span>
-            <span id="currentLangText">English</span>
-            <span>▼</span>
+            <span id="currentLangFlag" style="font-size: 24px;">🇬🇧</span>
+            <span id="currentLangText" style="font-weight: 600;">English</span>
+            <span style="font-size: 10px;">▼</span>
         </div>
         <div class="lang-dropdown" id="langDropdown">
             <div class="lang-option" onclick="switchLanguage('en')">
-                <span>🇬🇧</span>
-                <span>English</span>
+                <span style="font-size: 24px;">🇬🇧</span>
+                <span style="font-weight: 600;">English</span>
             </div>
             <div class="lang-option" onclick="switchLanguage('it')">
-                <span>🇮🇹</span>
-                <span>Italiano</span>
+                <span style="font-size: 24px;">🇮🇹</span>
+                <span style="font-weight: 600;">Italiano</span>
             </div>
         </div>
     </div>
@@ -737,7 +737,7 @@
         <div class="sidebar">
             <div class="header">
                 <h1>📝 ShiftNote</h1>
-                <p class="subtitle" data-lang="subtitle">Process Logbook by Saad</p>
+                <p class="subtitle">Process Logbook by Saad</p>
             </div>
 
             <div class="author-selector">
@@ -1175,7 +1175,11 @@
             }
 
             document.querySelectorAll('[data-lang]').forEach(el => {
-                el.textContent = translations[lang][el.getAttribute('data-lang')];
+                const key = el.getAttribute('data-lang');
+                // Skip subtitle - always keep in English
+                if (key !== 'subtitle') {
+                    el.textContent = translations[lang][key];
+                }
             });
 
             document.querySelectorAll('[data-lang-placeholder]').forEach(el => {
@@ -1250,8 +1254,22 @@
             showingFavoritesOnly = false;
             document.getElementById('authorFilter').value = '';
             updateFavoritesButton();
+            updateArchiveButton();
             renderNotesList();
             showToast(showingArchiveOnly ? translations[currentLang].showingArchive : '');
+        }
+
+        function updateArchiveButton() {
+            const btn = document.querySelector('[onclick="showArchive()"]');
+            if (showingArchiveOnly) {
+                btn.style.background = '#dc3545';
+                btn.style.color = 'white';
+                btn.innerHTML = `<span>◀</span><span>${currentLang === 'en' ? 'Back to Notes' : 'Torna alle Note'}</span>`;
+            } else {
+                btn.style.background = '#e9ecef';
+                btn.style.color = '#495057';
+                btn.innerHTML = `<span>📦</span><span data-lang="archive">${translations[currentLang].archive}</span>`;
+            }
         }
 
         function showNewNoteModal() {
@@ -1293,7 +1311,7 @@
             notes.unshift(note);
             saveNotes();
             renderNotesList();
-            selectNote(note.id);
+            selectNote(note.id, true); // Open in edit mode
             closeNewNoteModal();
             showToast(translations[currentLang].noteCreated);
         }
@@ -1344,7 +1362,7 @@
                             <span>📅 ${date}</span>
                         </div>
                         <div class="note-actions">
-                            <button class="note-action-btn note-action-edit" onclick="event.stopPropagation(); selectNote(${note.id})">
+                            <button class="note-action-btn note-action-edit" onclick="event.stopPropagation(); editNote(${note.id})">
                                 ${translations[currentLang].edit}
                             </button>
                             <button class="note-action-btn note-action-delete" onclick="event.stopPropagation(); deleteNoteFromList(${note.id})">
@@ -1392,11 +1410,11 @@
             showDeleteModal();
         }
 
-        function selectNote(id) {
+        function selectNote(id, editMode = false) {
             const note = notes.find(n => n.id === id);
             if (!note) return;
 
-            if (note.locked) {
+            if (note.locked && !editMode) {
                 currentNoteId = id;
                 document.getElementById('unlockModal').classList.add('active');
                 document.getElementById('unlockPassword').value = '';
@@ -1407,14 +1425,28 @@
             currentNoteId = id;
             document.getElementById('noteTitle').value = note.title;
             document.getElementById('noteContent').value = note.content;
-            document.getElementById('noteTitle').disabled = false;
-            document.getElementById('noteContent').disabled = false;
-            document.getElementById('saveBtn').disabled = false;
+            
+            // Read-only mode by default
+            if (!editMode) {
+                document.getElementById('noteTitle').disabled = true;
+                document.getElementById('noteContent').disabled = true;
+                document.getElementById('saveBtn').disabled = true;
+            } else {
+                // Edit mode when Edit button is clicked
+                document.getElementById('noteTitle').disabled = false;
+                document.getElementById('noteContent').disabled = false;
+                document.getElementById('saveBtn').disabled = false;
+            }
+            
             document.getElementById('currentColor').style.background = note.color;
             document.getElementById('noteContent').style.background = note.color;
 
             updateWordCount();
             renderNotesList();
+        }
+
+        function editNote(id) {
+            selectNote(id, true);
         }
 
         function clearEditor() {
@@ -1754,7 +1786,7 @@
                 notes.unshift(duplicate);
                 saveNotes();
                 renderNotesList();
-                selectNote(duplicate.id);
+                selectNote(duplicate.id, true); // Open in edit mode
             }
         }
 
@@ -1881,7 +1913,7 @@
                             <span>📅 ${date}</span>
                         </div>
                         <div class="note-actions">
-                            <button class="note-action-btn note-action-edit" onclick="event.stopPropagation(); selectNote(${note.id})">
+                            <button class="note-action-btn note-action-edit" onclick="event.stopPropagation(); editNote(${note.id})">
                                 ${translations[currentLang].edit}
                             </button>
                             <button class="note-action-btn note-action-delete" onclick="event.stopPropagation(); deleteNoteFromList(${note.id})">
@@ -2043,6 +2075,10 @@
         if (savedLang) {
             switchLanguage(savedLang);
         }
+        
+        // Initialize button states
+        updateFavoritesButton();
+        updateArchiveButton();
     </script>
 </body>
 </html>
