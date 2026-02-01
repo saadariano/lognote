@@ -30,13 +30,12 @@
             min-height: 90vh;
         }
 
-        /* Language Dropdown */
+        /* ========== LANGUAGE SWITCHER ========== */
         .language-switcher {
             position: fixed;
             top: 20px;
             right: 20px;
             z-index: 1000;
-            font-family: "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", "Apple Color Emoji", sans-serif;
         }
 
         .lang-current {
@@ -51,8 +50,45 @@
             gap: 8px;
         }
 
-        .lang-current:hover {
-            border-color: #667eea;
+        .lang-current:hover { border-color: #667eea; }
+
+        .lang-flag {
+            width: 28px;
+            height: 20px;
+            display: inline-block;
+            border-radius: 3px;
+            overflow: hidden;
+            vertical-align: middle;
+            border: 1px solid #ccc;
+        }
+
+        /* GB Flag */
+        .flag-gb {
+            background: #00247d;
+            position: relative;
+        }
+        .flag-gb::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(to bottom, transparent calc(50% - 2px), white calc(50% - 2px), white calc(50% + 2px), transparent calc(50% + 2px)),
+                linear-gradient(to right, transparent calc(50% - 2px), white calc(50% - 2px), white calc(50% + 2px), transparent calc(50% + 2px));
+        }
+        .flag-gb::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(135deg, transparent calc(50% - 3px), red calc(50% - 3px), red calc(50% + 3px), transparent calc(50% + 3px)),
+                linear-gradient(225deg, transparent calc(50% - 3px), red calc(50% - 3px), red calc(50% + 3px), transparent calc(50% + 3px)),
+                linear-gradient(to bottom, transparent calc(50% - 1.5px), red calc(50% - 1.5px), red calc(50% + 1.5px), transparent calc(50% + 1.5px)),
+                linear-gradient(to right, transparent calc(50% - 1.5px), red calc(50% - 1.5px), red calc(50% + 1.5px), transparent calc(50% + 1.5px));
+        }
+
+        /* Italy Flag */
+        .flag-it {
+            background: linear-gradient(to right, #009246 0%, #009246 33.33%, #fff 33.33%, #fff 66.66%, #ce2b37 66.66%, #ce2b37 100%);
         }
 
         .lang-dropdown {
@@ -65,26 +101,24 @@
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             overflow: hidden;
+            min-width: 140px;
         }
 
-        .lang-dropdown.active {
-            display: block;
-        }
+        .lang-dropdown.active { display: block; }
 
         .lang-option {
             padding: 10px 15px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 16px;
+            gap: 10px;
+            font-size: 15px;
             transition: all 0.3s;
         }
 
-        .lang-option:hover {
-            background: #f0f3ff;
-        }
+        .lang-option:hover { background: #f0f3ff; }
 
+        /* ========== SIDEBAR ========== */
         .sidebar {
             background: #f8f9fa;
             border-right: 2px solid #e9ecef;
@@ -99,641 +133,372 @@
             border-bottom: 3px solid #667eea;
         }
 
-        .header h1 {
-            color: #667eea;
-            font-size: 28px;
-            margin-bottom: 5px;
-        }
+        .header h1 { color: #667eea; font-size: 28px; margin-bottom: 5px; }
+        .header p { color: #6c757d; font-size: 13px; }
 
-        .header p {
-            color: #6c757d;
-            font-size: 13px;
-        }
-
-        .author-selector {
-            margin-bottom: 20px;
-        }
-
+        .author-selector { margin-bottom: 20px; }
         .author-selector select {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
-            font-size: 14px;
-            background: white;
-            cursor: pointer;
+            width: 100%; padding: 12px;
+            border: 2px solid #e9ecef; border-radius: 10px;
+            font-size: 14px; background: white; cursor: pointer;
         }
 
-        .search-box {
-            position: relative;
-            margin-bottom: 20px;
-        }
-
+        .search-box { position: relative; margin-bottom: 20px; }
         .search-box input {
-            width: 100%;
-            padding: 12px 40px 12px 15px;
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
-            font-size: 14px;
+            width: 100%; padding: 12px 40px 12px 15px;
+            border: 2px solid #e9ecef; border-radius: 10px; font-size: 14px;
         }
+        .search-icon { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: #6c757d; }
 
-        .search-icon {
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #6c757d;
-        }
-
-        .action-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
+        .action-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
 
         .btn {
-            padding: 10px 15px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 600;
-            transition: all 0.3s;
+            padding: 10px 15px; border: none; border-radius: 8px;
+            cursor: pointer; font-size: 13px; font-weight: 600;
+            transition: all 0.3s; display: flex; align-items: center;
+            justify-content: center; gap: 6px; position: relative;
+        }
+
+        .btn-primary { background: #667eea; color: white; grid-column: 1 / -1; }
+        .btn-primary:hover { background: #5568d3; transform: translateY(-2px); }
+        .btn-secondary { background: #e9ecef; color: #495057; }
+        .btn-secondary:hover { background: #dee2e6; }
+        .btn-favorites { background: #ffc107; color: #000; grid-column: 1 / -1; }
+        .btn-favorites:hover { background: #ffb300; }
+        .btn-back { background: #28a745; color: white; grid-column: 1 / -1; }
+        .btn-back:hover { background: #218838; }
+
+        /* ===== NOTIFICATION BADGE ===== */
+        .notif-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #dc3545;
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            min-width: 20px;
+            height: 20px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            border: 2px solid white;
+            box-shadow: 0 2px 6px rgba(220,53,69,0.5);
+            animation: badgePulse 1.5s infinite;
+            z-index: 10;
+        }
+        .notif-badge.hidden { display: none; }
+
+        @keyframes badgePulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 2px 6px rgba(220,53,69,0.5); }
+            50% { transform: scale(1.2); box-shadow: 0 2px 12px rgba(220,53,69,0.8); }
         }
 
-        .btn-primary {
-            background: #667eea;
-            color: white;
-            grid-column: 1 / -1;
-        }
-
-        .btn-primary:hover {
-            background: #5568d3;
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background: #e9ecef;
-            color: #495057;
-        }
-
-        .btn-secondary:hover {
-            background: #dee2e6;
-        }
-
-        .btn-favorites {
-            background: #ffc107;
-            color: #000;
-            grid-column: 1 / -1;
-        }
-
-        .btn-favorites:hover {
-            background: #ffb300;
-        }
-
-        .btn-back {
-            background: #28a745;
-            color: white;
-            grid-column: 1 / -1;
-        }
-
-        .btn-back:hover {
-            background: #218838;
-        }
-
-        .notes-list {
-            max-height: calc(90vh - 500px);
-            overflow-y: auto;
-        }
+        /* ========== NOTES LIST ========== */
+        .notes-list { max-height: calc(90vh - 500px); overflow-y: auto; }
 
         .note-item {
-            background: white;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 10px;
-            border: 2px solid #e9ecef;
-            cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
+            background: white; padding: 15px; margin-bottom: 10px;
+            border-radius: 10px; border: 2px solid #e9ecef;
+            cursor: pointer; transition: all 0.3s; position: relative;
         }
+        .note-item:hover { border-color: #667eea; transform: translateX(5px); }
+        .note-item.active { border-color: #667eea; background: #f0f3ff; }
+        .note-item.archived { opacity: 0.6; }
+        .note-item h3 { color: #495057; font-size: 15px; margin-bottom: 5px; padding-right: 60px; }
+        .note-item p { color: #6c757d; font-size: 12px; }
 
-        .note-item:hover {
-            border-color: #667eea;
-            transform: translateX(5px);
-        }
+        .note-meta { display: flex; justify-content: space-between; margin-top: 8px; font-size: 11px; color: #adb5bd; }
 
-        .note-item.active {
-            border-color: #667eea;
-            background: #f0f3ff;
-        }
+        .note-icons { position: absolute; top: 15px; right: 15px; display: flex; gap: 5px; }
+        .note-icon-btn { background: none; border: none; cursor: pointer; font-size: 18px; padding: 2px; }
 
-        .note-item.archived {
-            opacity: 0.6;
-        }
-
-        .note-item h3 {
-            color: #495057;
-            font-size: 15px;
-            margin-bottom: 5px;
-            padding-right: 60px;
-        }
-
-        .note-item p {
-            color: #6c757d;
-            font-size: 12px;
-        }
-
-        .note-meta {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 8px;
-            font-size: 11px;
-            color: #adb5bd;
-        }
-
-        .note-icons {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            display: flex;
-            gap: 5px;
-        }
-
-        .note-icon-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 18px;
-            padding: 2px;
-        }
-
-        .note-actions {
-            display: flex;
-            gap: 5px;
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px solid #e9ecef;
-        }
-
+        .note-actions { display: flex; gap: 5px; margin-top: 10px; padding-top: 10px; border-top: 1px solid #e9ecef; }
         .note-action-btn {
-            flex: 1;
-            padding: 5px 8px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 11px;
-            font-weight: 600;
-            transition: all 0.3s;
+            flex: 1; padding: 5px 8px; border: none; border-radius: 5px;
+            cursor: pointer; font-size: 11px; font-weight: 600; transition: all 0.3s;
         }
+        .note-action-edit { background: #17a2b8; color: white; }
+        .note-action-delete { background: #dc3545; color: white; }
+        .note-action-archive { background: #6c757d; color: white; }
 
-        .note-action-edit {
-            background: #17a2b8;
-            color: white;
-        }
+        /* ========== EDITOR ========== */
+        .editor-section { padding: 30px; display: flex; flex-direction: column; }
 
-        .note-action-delete {
-            background: #dc3545;
-            color: white;
-        }
-
-        .note-action-archive {
-            background: #6c757d;
-            color: white;
-        }
-
-        .editor-section {
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .editor-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #e9ecef;
-        }
-
+        .editor-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px solid #e9ecef; }
         .editor-header input {
-            font-size: 24px;
-            font-weight: 700;
-            border: none;
-            color: #212529;
-            width: 100%;
-            padding: 10px;
-            border-radius: 8px;
+            font-size: 24px; font-weight: 700; border: none; color: #212529;
+            width: 100%; padding: 10px; border-radius: 8px;
         }
 
-        .template-toolbar {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
+        .template-toolbar { display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; }
+        .template-btn { padding: 8px 15px; background: #667eea; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600; }
+        .template-btn:hover { background: #5568d3; }
 
-        .template-btn {
-            padding: 8px 15px;
-            background: #667eea;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .template-btn:hover {
-            background: #5568d3;
-        }
-
-        .editor-toolbar {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-        }
-
-        .toolbar-btn {
-            padding: 8px 12px;
-            background: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 12px;
-        }
-
-        .toolbar-btn:hover {
-            background: #e9ecef;
-        }
+        .editor-toolbar { display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; }
+        .toolbar-btn { padding: 8px 12px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 6px; cursor: pointer; font-size: 12px; }
+        .toolbar-btn:hover { background: #e9ecef; }
 
         .editor-content {
-            flex: 1;
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
-            padding: 20px;
-            font-size: 15px;
-            line-height: 1.8;
-            resize: none;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            min-height: 400px;
+            flex: 1; border: 2px solid #e9ecef; border-radius: 10px;
+            padding: 20px; font-size: 15px; line-height: 1.8; resize: none;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; min-height: 400px;
         }
-
-        .editor-content:focus {
-            outline: none;
-            border-color: #667eea;
-        }
+        .editor-content:focus { outline: none; border-color: #667eea; }
 
         .editor-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 20px;
-            padding-top: 15px;
-            border-top: 2px solid #e9ecef;
+            display: flex; justify-content: space-between; align-items: center;
+            margin-top: 20px; padding-top: 15px; border-top: 2px solid #e9ecef;
         }
+        .word-count { color: #6c757d; font-size: 13px; }
 
-        .word-count {
-            color: #6c757d;
-            font-size: 13px;
-        }
+        .bottom-toolbar { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px; }
+        .bottom-btn { padding: 8px 15px; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600; position: relative; }
 
-        .bottom-toolbar {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 15px;
-        }
-
-        .bottom-btn {
-            padding: 8px 15px;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .btn-delete {
-            background: #dc3545;
-        }
-
-        .btn-delete:hover {
-            background: #c82333;
-        }
-
-        .btn-reminder {
-            background: #ffc107;
-            color: #000;
-        }
-
-        .btn-reminder:hover {
-            background: #e0a800;
-        }
-
-        .btn-lock {
-            background: #6c757d;
-        }
-
-        .btn-lock:hover {
-            background: #5a6268;
-        }
-
-        .btn-history {
-            background: #17a2b8;
-        }
-
-        .btn-history:hover {
-            background: #138496;
-        }
-
-        .btn-pdf {
-            background: #e83e8c;
-        }
-
-        .btn-pdf:hover {
-            background: #d63384;
-        }
+        .btn-delete { background: #dc3545; }
+        .btn-delete:hover { background: #c82333; }
+        .btn-reminder { background: #ffc107; color: #000; }
+        .btn-reminder:hover { background: #e0a800; }
+        .btn-lock { background: #6c757d; }
+        .btn-lock:hover { background: #5a6268; }
+        .btn-history { background: #17a2b8; }
+        .btn-history:hover { background: #138496; }
+        .btn-pdf { background: #e83e8c; }
+        .btn-pdf:hover { background: #d63384; }
 
         .save-btn {
             padding: 12px 30px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
+            color: white; border: none; border-radius: 8px;
+            font-size: 14px; font-weight: 600; cursor: pointer;
         }
+        .save-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-        /* Modal Styles */
+        /* ========== MODALS ========== */
         .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
+            display: none; position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%; background: rgba(0,0,0,0.7);
+            z-index: 2000; justify-content: center; align-items: center;
         }
-
-        .modal.active {
-            display: flex;
-        }
+        .modal.active { display: flex; }
 
         .modal-content {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            max-width: 500px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
+            background: white; padding: 30px; border-radius: 15px;
+            max-width: 550px; width: 90%; max-height: 85vh; overflow-y: auto;
         }
-
-        .modal-header {
-            font-size: 22px;
-            font-weight: 700;
-            color: #667eea;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
+        .modal-header { font-size: 22px; font-weight: 700; color: #667eea; margin-bottom: 20px; text-align: center; }
         .modal-input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            font-size: 14px;
+            width: 100%; padding: 12px; margin-bottom: 15px;
+            border: 2px solid #e9ecef; border-radius: 8px; font-size: 14px;
+        }
+        .modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
+        .modal-btn { padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600; }
+        .modal-btn-primary { background: #667eea; color: white; }
+        .modal-btn-secondary { background: #e9ecef; color: #495057; }
+
+        .error-message { color: #dc3545; font-size: 12px; margin-top: 5px; display: none; }
+        .error-message.show { display: block; }
+
+        /* ========== REMINDER TABLE in Modal ========== */
+        .reminder-table {
+            width: 100%; border-collapse: collapse; margin-top: 10px; margin-bottom: 15px;
+        }
+        .reminder-table th {
+            background: #667eea; color: white; padding: 10px 8px;
+            text-align: left; font-size: 13px; font-weight: 600;
+            border: 1px solid #5568d3;
+        }
+        .reminder-table td {
+            padding: 8px; border: 1px solid #e9ecef; font-size: 13px; vertical-align: top;
+        }
+        .reminder-table tr:nth-child(even) { background: #f8f9fa; }
+        .reminder-table input, .reminder-table textarea {
+            width: 100%; padding: 6px 8px; border: 1px solid #dee2e6;
+            border-radius: 5px; font-size: 13px; font-family: inherit;
+        }
+        .reminder-table textarea { resize: vertical; min-height: 40px; }
+        .reminder-table input:focus, .reminder-table textarea:focus { outline: none; border-color: #667eea; }
+
+        .reminder-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .reminder-form-row label { font-size: 12px; color: #6c757d; margin-bottom: 3px; display: block; }
+
+        /* ========== SAVED REMINDERS LIST ========== */
+        .saved-reminders { max-height: 200px; overflow-y: auto; margin-top: 10px; }
+        .saved-reminder-item {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            padding: 10px 12px; margin-bottom: 6px; border-radius: 8px;
+            border-left: 4px solid #667eea; background: #f0f3ff; font-size: 12px;
+        }
+        .saved-reminder-item.active-reminder { border-left-color: #dc3545; background: #fff0f0; animation: reminderPulse 1s infinite; }
+        .saved-reminder-item .sr-title { font-weight: 700; color: #495057; margin-bottom: 2px; }
+        .saved-reminder-item .sr-time { color: #6c757d; font-size: 11px; }
+        .saved-reminder-item .sr-desc { color: #495057; margin-top: 3px; }
+        .saved-reminder-item .sr-delete { background: none; border: none; color: #dc3545; cursor: pointer; font-size: 16px; padding: 0 4px; }
+
+        @keyframes reminderPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(220,53,69,0.4); }
+            50% { box-shadow: 0 0 12px 4px rgba(220,53,69,0.3); }
         }
 
-        .modal-actions {
-            display: flex;
-            gap: 10px;
-            justify-content: flex-end;
+        /* ========== NOTIFICATION POPUP ========== */
+        .notification-popup {
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+            background: white; border-radius: 14px; padding: 18px 24px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.25); z-index: 9999;
+            border-top: 4px solid #dc3545; max-width: 380px; width: 90%;
+            display: none; animation: slideDown 0.3s ease;
+        }
+        .notification-popup.show { display: block; }
+        .notification-popup .np-title { font-weight: 700; font-size: 16px; color: #dc3545; margin-bottom: 4px; }
+        .notification-popup .np-time { font-size: 12px; color: #6c757d; margin-bottom: 6px; }
+        .notification-popup .np-desc { font-size: 13px; color: #495057; margin-bottom: 10px; }
+        .notification-popup .np-close {
+            background: #dc3545; color: white; border: none; border-radius: 6px;
+            padding: 6px 16px; cursor: pointer; font-size: 13px; font-weight: 600;
         }
 
-        .modal-btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 600;
+        @keyframes slideDown {
+            from { top: -80px; opacity: 0; }
+            to { top: 20px; opacity: 1; }
         }
 
-        .modal-btn-primary {
-            background: #667eea;
-            color: white;
-        }
-
-        .modal-btn-secondary {
-            background: #e9ecef;
-            color: #495057;
-        }
-
-        .error-message {
-            color: #dc3545;
-            font-size: 12px;
-            margin-top: 5px;
-            display: none;
-        }
-
-        .error-message.show {
-            display: block;
-        }
-
-        /* Toast */
+        /* ========== TOAST ========== */
         .toast {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #28a745;
-            color: white;
-            padding: 15px 25px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            font-size: 14px;
-            font-weight: 600;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.3s;
-            z-index: 3000;
+            position: fixed; bottom: 30px; right: 30px;
+            background: #28a745; color: white; padding: 15px 25px;
+            border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            font-size: 14px; font-weight: 600; opacity: 0;
+            transform: translateY(20px); transition: all 0.3s; z-index: 3000;
         }
+        .toast.show { opacity: 1; transform: translateY(0); }
 
-        .toast.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Statistics Card */
+        /* ========== STATISTICS ========== */
         .statistics-card {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 20px;
-            border-radius: 15px;
-            margin-top: 20px;
-            color: white;
+            padding: 20px; border-radius: 15px; margin-top: 20px; color: white;
         }
+        .statistics-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; font-size: 20px; font-weight: 700; }
+        .stat-item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.2); }
+        .stat-item:last-child { border-bottom: none; }
+        .stat-label { font-size: 14px; opacity: 0.9; }
+        .stat-value { font-size: 18px; font-weight: 700; }
 
-        .statistics-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-            font-size: 20px;
-            font-weight: 700;
-        }
-
-        .stat-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .stat-item:last-child {
-            border-bottom: none;
-        }
-
-        .stat-label {
-            font-size: 14px;
-            opacity: 0.9;
-        }
-
-        .stat-value {
-            font-size: 18px;
-            font-weight: 700;
-        }
-
-        .color-picker {
-            position: relative;
-            display: inline-block;
-        }
-
+        /* ========== COLOR PICKER ========== */
+        .color-picker { position: relative; display: inline-block; }
         .color-options {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: white;
-            padding: 10px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            z-index: 100;
-            margin-top: 5px;
+            display: none; position: absolute; top: 100%; left: 0;
+            background: white; padding: 10px; border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 100; margin-top: 5px;
         }
+        .color-options.active { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
+        .color-option { width: 30px; height: 30px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; }
+        .color-option:hover { transform: scale(1.1); border-color: #667eea; }
 
-        .color-options.active {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-        }
+        /* ========== HISTORY ========== */
+        .history-item { padding: 10px; background: #f8f9fa; margin-bottom: 10px; border-radius: 8px; border-left: 3px solid #667eea; cursor: pointer; }
+        .history-item:hover { background: #e9ecef; }
+        .history-time { font-size: 11px; color: #6c757d; margin-bottom: 5px; }
+        .history-preview { font-size: 13px; color: #495057; }
 
-        .color-option {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            border: 2px solid transparent;
-        }
+        /* ========== DARK MODE ========== */
+        .dark-mode { background: linear-gradient(135deg, #2d3561 0%, #3d2961 100%); }
+        .dark-mode .container { background: #1a1a2e; color: #eee; }
+        .dark-mode .sidebar { background: #16213e; }
+        .dark-mode .editor-content { background: #16213e; color: #eee; }
 
-        .color-option:hover {
-            transform: scale(1.1);
-            border-color: #667eea;
-        }
+        /* ========== SEARCH HIGHLIGHT + VIBRATE ========== */
+        .highlight { background-color: yellow; font-weight: bold; animation: pulse 0.5s; }
+        @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
 
-        .history-item {
-            padding: 10px;
-            background: #f8f9fa;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            border-left: 3px solid #667eea;
-            cursor: pointer;
-        }
-
-        .history-item:hover {
-            background: #e9ecef;
-        }
-
-        .history-time {
-            font-size: 11px;
-            color: #6c757d;
-            margin-bottom: 5px;
-        }
-
-        .history-preview {
-            font-size: 13px;
-            color: #495057;
-        }
-
-        .dark-mode {
-            background: linear-gradient(135deg, #2d3561 0%, #3d2961 100%);
-        }
-
-        .dark-mode .container {
-            background: #1a1a2e;
-            color: #eee;
-        }
-
-        .dark-mode .sidebar {
-            background: #16213e;
-        }
-
-        .dark-mode .editor-content {
-            background: #16213e;
-            color: #eee;
-        }
-
-        .highlight {
-            background-color: yellow;
+        .vibrate-word {
+            display: inline-block;
+            background-color: #ffe066;
             font-weight: bold;
-            animation: pulse 0.5s;
+            border-radius: 3px;
+            padding: 1px 3px;
+            animation: vibrate 0.15s linear infinite;
+        }
+        @keyframes vibrate {
+            0% { transform: translate(0,0); }
+            25% { transform: translate(-1px,1px); }
+            50% { transform: translate(1px,-1px); }
+            75% { transform: translate(-1px,-1px); }
+            100% { transform: translate(1px,1px); }
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        /* ========== SHIFT NOTE STYLES ========== */
+        .shift-header {
+            text-align: center; padding: 14px 20px;
+            background: #1a1a2e; border-radius: 10px 10px 0 0;
+            border-bottom: 3px solid #dc3545;
         }
+        .shift-header .company-name { color: #dc3545; font-size: 22px; font-weight: 800; letter-spacing: 3px; }
+        .shift-header .shift-label { color: #eee; font-size: 15px; margin-top: 4px; }
+        .shift-header .shift-time { color: #ffc107; font-size: 18px; font-weight: 700; margin-top: 2px; }
 
-        @media (max-width: 768px) {
-            .container {
-                grid-template-columns: 1fr;
+        .shift-body { padding: 18px 20px; background: #fff; border: 2px solid #1a1a2e; border-top: none; border-radius: 0 0 10px 10px; }
+        .shift-leader-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px dashed #ccc; }
+        .shift-leader-row label { font-size: 13px; color: #6c757d; font-weight: 600; white-space: nowrap; }
+        .shift-leader-row input {
+            flex: 1; padding: 8px 12px; border: 2px solid #e9ecef;
+            border-radius: 6px; font-size: 14px; font-weight: 600; color: #333;
+        }
+        .shift-leader-row input:focus { outline: none; border-color: #667eea; }
+
+        .shift-note-area {
+            width: 100%; min-height: 200px; padding: 12px;
+            border: 2px solid #e9ecef; border-radius: 8px;
+            font-size: 14px; font-family: inherit; resize: vertical;
+            line-height: 1.7;
+        }
+        .shift-note-area:focus { outline: none; border-color: #667eea; }
+
+        /* ========== PRINT FRAME ========== */
+        @media print {
+            body { background: white !important; padding: 0; }
+            .print-frame {
+                border: 3px solid #1a1a2e !important;
+                border-radius: 12px !important;
+                max-width: 700px; margin: 30px auto; padding: 0; overflow: hidden;
             }
+            .print-frame .shift-header { border-radius: 0; }
+            .print-frame .shift-body { border-radius: 0; border: none; border-top: 1px solid #ddd; }
         }
+
+        @media (max-width: 768px) { .container { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-    <!-- Language Dropdown -->
+    <!-- Language Switcher -->
     <div class="language-switcher">
         <div class="lang-current" onclick="toggleLanguageDropdown()">
-            <span id="currentLangFlag" style="font-size: 24px;">🇬🇧</span>
-            <span id="currentLangText" style="font-weight: 600;">English</span>
-            <span style="font-size: 10px;">▼</span>
+            <span class="lang-flag flag-gb" id="currentLangFlag"></span>
+            <span id="currentLangText" style="font-weight:600;">English</span>
+            <span style="font-size:10px;">▼</span>
         </div>
         <div class="lang-dropdown" id="langDropdown">
             <div class="lang-option" onclick="switchLanguage('en')">
-                <span style="font-size: 24px;">🇬🇧</span>
-                <span style="font-weight: 600;">English</span>
+                <span class="lang-flag flag-gb"></span>
+                <span style="font-weight:600;">English</span>
             </div>
             <div class="lang-option" onclick="switchLanguage('it')">
-                <span style="font-size: 24px;">🇮🇹</span>
-                <span style="font-weight: 600;">Italiano</span>
+                <span class="lang-flag flag-it"></span>
+                <span style="font-weight:600;">Italiano</span>
             </div>
         </div>
     </div>
 
+    <!-- Notification Popup -->
+    <div class="notification-popup" id="notificationPopup">
+        <div class="np-title" id="npTitle">Reminder</div>
+        <div class="np-time" id="npTime"></div>
+        <div class="np-desc" id="npDesc"></div>
+        <button class="np-close" onclick="dismissNotification()">✓ OK</button>
+    </div>
+
     <div class="container">
-        <!-- Sidebar -->
+        <!-- ===== SIDEBAR ===== -->
         <div class="sidebar">
             <div class="header">
                 <h1>📝 ShiftNote</h1>
@@ -753,96 +518,72 @@
 
             <div class="action-buttons">
                 <button class="btn btn-primary" onclick="showNewNoteModal()">
-                    <span>➕</span>
-                    <span data-lang="newNote">New Note</span>
+                    <span>➕</span><span data-lang="newNote">New Note</span>
                 </button>
                 <button class="btn btn-favorites" id="favoritesBtn" onclick="showFavorites()">
-                    <span>⭐</span>
-                    <span data-lang="favorites">Favorites</span>
+                    <span>⭐</span><span data-lang="favorites">Favorites</span>
                 </button>
                 <button class="btn btn-secondary" onclick="showArchive()">
-                    <span>📦</span>
-                    <span data-lang="archive">Archive</span>
+                    <span>📦</span><span data-lang="archive">Archive</span>
+                </button>
+                <!-- REMINDER button with badge -->
+                <button class="btn btn-secondary" id="reminderListBtn" onclick="showReminderList()" style="position:relative;">
+                    <span>⏰</span><span data-lang="reminder">Reminder</span>
+                    <span class="notif-badge hidden" id="reminderBadge">0</span>
                 </button>
                 <button class="btn btn-secondary" onclick="showCalendar()">
-                    <span>📅</span>
-                    <span data-lang="calendar">Calendar</span>
+                    <span>📅</span><span data-lang="calendar">Calendar</span>
                 </button>
                 <button class="btn btn-secondary" onclick="exportAllNotes()">
-                    <span>📤</span>
-                    <span data-lang="export">Export</span>
+                    <span>📤</span><span data-lang="export">Export</span>
                 </button>
                 <button class="btn btn-secondary" onclick="showImportModal()">
-                    <span>📥</span>
-                    <span data-lang="import">Import</span>
+                    <span>📥</span><span data-lang="import">Import</span>
                 </button>
                 <button class="btn btn-secondary" onclick="toggleDarkMode()">
-                    <span>🌙</span>
-                    <span data-lang="darkMode">Dark</span>
+                    <span>🌙</span><span data-lang="darkMode">Dark</span>
                 </button>
             </div>
 
             <div class="notes-list" id="notesList"></div>
 
-            <!-- Statistics Card -->
             <div class="statistics-card">
-                <div class="statistics-header">
-                    <span>📊</span>
-                    <span data-lang="statistics">Statistics</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-label" data-lang="totalNotes">Total Notes:</span>
-                    <span class="stat-value" id="totalNotes">0</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-label" data-lang="favoritesCount">Favorites:</span>
-                    <span class="stat-value" id="totalFavorites">0</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-label" data-lang="totalWords">Total Words:</span>
-                    <span class="stat-value" id="totalWords">0</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-label" data-lang="lastUpdate">Last Updated:</span>
-                    <span class="stat-value" id="lastUpdated" data-lang="never">Never</span>
-                </div>
+                <div class="statistics-header"><span>📊</span><span data-lang="statistics">Statistics</span></div>
+                <div class="stat-item"><span class="stat-label" data-lang="totalNotes">Total Notes:</span><span class="stat-value" id="totalNotes">0</span></div>
+                <div class="stat-item"><span class="stat-label" data-lang="favoritesCount">Favorites:</span><span class="stat-value" id="totalFavorites">0</span></div>
+                <div class="stat-item"><span class="stat-label" data-lang="totalWords">Total Words:</span><span class="stat-value" id="totalWords">0</span></div>
+                <div class="stat-item"><span class="stat-label" data-lang="lastUpdate">Last Updated:</span><span class="stat-value" id="lastUpdated" data-lang="never">Never</span></div>
             </div>
         </div>
 
-        <!-- Editor Section -->
+        <!-- ===== EDITOR ===== -->
         <div class="editor-section">
             <div class="editor-header">
                 <input type="text" id="noteTitle" data-lang-placeholder="noteTitlePlaceholder" placeholder="Note Title..." disabled>
             </div>
 
-            <!-- Template Toolbar -->
             <div class="template-toolbar">
-                <button class="template-btn" onclick="addTemplate('note')">
-                    <span>📝</span> <span data-lang="simpleNote">Simple Note</span>
-                </button>
-                <button class="template-btn" onclick="addTemplate('checklist')">
-                    <span>✅</span> <span data-lang="checklist">Checklist</span>
-                </button>
-                <button class="template-btn" onclick="addTemplate('instructions')">
-                    <span>📖</span> <span data-lang="instructions">Instructions</span>
-                </button>
+                <button class="template-btn" onclick="addTemplate('note')"><span>📝</span> <span data-lang="simpleNote">Simple Note</span></button>
+                <button class="template-btn" onclick="addTemplate('checklist')"><span>✅</span> <span data-lang="checklist">Checklist</span></button>
+                <button class="template-btn" onclick="addTemplate('instructions')"><span>📖</span> <span data-lang="instructions">Instructions</span></button>
+                <button class="template-btn" onclick="openShiftNote()" style="background:#1a1a2e;"><span>🏭</span> <span data-lang="createShiftNote">Create Shift Note</span></button>
+                <button class="template-btn" onclick="viewShiftNotes()" style="background:#17a2b8; color:white;"><span>📋</span> <span data-lang="viewShiftNotes">View Shift Notes</span></button>
             </div>
 
-            <!-- Editor Toolbar -->
             <div class="editor-toolbar">
                 <div class="color-picker">
                     <button class="toolbar-btn" onclick="toggleColorPicker()">
-                        🎨 <span id="currentColor" style="display: inline-block; width: 15px; height: 15px; background: white; border: 1px solid #ddd; border-radius: 3px; vertical-align: middle;"></span>
+                        🎨 <span id="currentColor" style="display:inline-block;width:15px;height:15px;background:white;border:1px solid #ddd;border-radius:3px;vertical-align:middle;"></span>
                     </button>
                     <div class="color-options" id="colorOptions">
-                        <div class="color-option" style="background: #ffffff;" onclick="setNoteColor('#ffffff')"></div>
-                        <div class="color-option" style="background: #fff3cd;" onclick="setNoteColor('#fff3cd')"></div>
-                        <div class="color-option" style="background: #d1ecf1;" onclick="setNoteColor('#d1ecf1')"></div>
-                        <div class="color-option" style="background: #d4edda;" onclick="setNoteColor('#d4edda')"></div>
-                        <div class="color-option" style="background: #f8d7da;" onclick="setNoteColor('#f8d7da')"></div>
-                        <div class="color-option" style="background: #e2e3e5;" onclick="setNoteColor('#e2e3e5')"></div>
-                        <div class="color-option" style="background: #d6d8db;" onclick="setNoteColor('#d6d8db')"></div>
-                        <div class="color-option" style="background: #fce4ec;" onclick="setNoteColor('#fce4ec')"></div>
+                        <div class="color-option" style="background:#ffffff;" onclick="setNoteColor('#ffffff')"></div>
+                        <div class="color-option" style="background:#fff3cd;" onclick="setNoteColor('#fff3cd')"></div>
+                        <div class="color-option" style="background:#d1ecf1;" onclick="setNoteColor('#d1ecf1')"></div>
+                        <div class="color-option" style="background:#d4edda;" onclick="setNoteColor('#d4edda')"></div>
+                        <div class="color-option" style="background:#f8d7da;" onclick="setNoteColor('#f8d7da')"></div>
+                        <div class="color-option" style="background:#e2e3e5;" onclick="setNoteColor('#e2e3e5')"></div>
+                        <div class="color-option" style="background:#d6d8db;" onclick="setNoteColor('#d6d8db')"></div>
+                        <div class="color-option" style="background:#fce4ec;" onclick="setNoteColor('#fce4ec')"></div>
                     </div>
                 </div>
                 <button class="toolbar-btn" onclick="insertDateTime()">🕒 Date/Time</button>
@@ -855,7 +596,7 @@
 
             <div class="editor-footer">
                 <div class="word-count">
-                    <span data-lang="wordCount">Words:</span> <span id="wordCount">0</span> | 
+                    <span data-lang="wordCount">Words:</span> <span id="wordCount">0</span> |
                     <span data-lang="charCount">Characters:</span> <span id="charCount">0</span>
                 </div>
                 <button class="save-btn" onclick="saveCurrentNote()" disabled id="saveBtn">
@@ -863,35 +604,22 @@
                 </button>
             </div>
 
-            <!-- Bottom Toolbar with Colored Buttons -->
             <div class="bottom-toolbar">
-                <button class="bottom-btn btn-delete" onclick="showDeleteModal()">
-                    🗑️ <span data-lang="delete">Delete</span>
-                </button>
-                <button class="bottom-btn btn-reminder" onclick="addReminder()">
-                    ⏰ <span data-lang="reminder">Reminder</span>
-                </button>
-                <button class="bottom-btn btn-lock" onclick="showLockModal()">
-                    🔒 <span data-lang="lock">Lock</span>
-                </button>
-                <button class="bottom-btn btn-history" onclick="showHistory()">
-                    📜 <span data-lang="history">History</span>
-                </button>
-                <button class="bottom-btn btn-pdf" onclick="exportToPDF()">
-                    📄 PDF
-                </button>
+                <button class="bottom-btn btn-delete" onclick="showDeleteModal()">🗑️ <span data-lang="delete">Delete</span></button>
+                <button class="bottom-btn btn-reminder" onclick="showReminderModal()">⏰ <span data-lang="reminder">Reminder</span></button>
+                <button class="bottom-btn btn-lock" onclick="showLockModal()">🔒 <span data-lang="lock">Lock</span></button>
+                <button class="bottom-btn btn-history" onclick="showHistory()">📜 <span data-lang="history">History</span></button>
+                <button class="bottom-btn btn-pdf" onclick="exportToPDF()">📄 PDF</button>
             </div>
         </div>
     </div>
 
-    <!-- Modals -->
+    <!-- ===== NEW NOTE MODAL ===== -->
     <div class="modal" id="newNoteModal">
         <div class="modal-content">
             <div class="modal-header" data-lang="createNewNote">Create New Note</div>
-            <div class="modal-body">
-                <input type="text" class="modal-input" id="newNoteAuthor" data-lang-placeholder="authorName" placeholder="Your name">
-                <input type="text" class="modal-input" id="newNoteTitle" data-lang-placeholder="noteTitle" placeholder="Note title">
-            </div>
+            <input type="text" class="modal-input" id="newNoteAuthor" data-lang-placeholder="authorName" placeholder="Your name">
+            <input type="text" class="modal-input" id="newNoteTitle" data-lang-placeholder="noteTitle" placeholder="Note title">
             <div class="modal-actions">
                 <button class="modal-btn modal-btn-secondary" onclick="closeNewNoteModal()" data-lang="cancel">Cancel</button>
                 <button class="modal-btn modal-btn-primary" onclick="createNoteWithDetails()" data-lang="create">Create</button>
@@ -899,13 +627,12 @@
         </div>
     </div>
 
+    <!-- ===== DELETE PASSWORD MODAL ===== -->
     <div class="modal" id="passwordModal">
         <div class="modal-content">
             <div class="modal-header" data-lang="enterPassword">Enter Password to Delete</div>
-            <div class="modal-body">
-                <input type="password" class="modal-input" id="deletePassword" data-lang-placeholder="password" placeholder="Password">
-                <div class="error-message" id="deleteError" data-lang="wrongPassword">Wrong password!</div>
-            </div>
+            <input type="password" class="modal-input" id="deletePassword" placeholder="Password">
+            <div class="error-message" id="deleteError" data-lang="wrongPassword">Wrong password!</div>
             <div class="modal-actions">
                 <button class="modal-btn modal-btn-secondary" onclick="closePasswordModal()" data-lang="cancel">Cancel</button>
                 <button class="modal-btn modal-btn-primary" onclick="confirmDelete()" data-lang="delete">Delete</button>
@@ -913,14 +640,13 @@
         </div>
     </div>
 
+    <!-- ===== LOCK MODAL ===== -->
     <div class="modal" id="lockModal">
         <div class="modal-content">
             <div class="modal-header" data-lang="setLock">Set Personal Lock</div>
-            <div class="modal-body">
-                <input type="password" class="modal-input" id="lockPassword" data-lang-placeholder="enterPassword" placeholder="Enter password">
-                <input type="password" class="modal-input" id="lockPasswordConfirm" data-lang-placeholder="confirmPassword" placeholder="Confirm password">
-                <div class="error-message" id="lockError"></div>
-            </div>
+            <input type="password" class="modal-input" id="lockPassword" placeholder="Enter password">
+            <input type="password" class="modal-input" id="lockPasswordConfirm" placeholder="Confirm password">
+            <div class="error-message" id="lockError"></div>
             <div class="modal-actions">
                 <button class="modal-btn modal-btn-secondary" onclick="closeLockModal()" data-lang="cancel">Cancel</button>
                 <button class="modal-btn modal-btn-primary" onclick="setLock()" data-lang="setLock">Set Lock</button>
@@ -928,13 +654,12 @@
         </div>
     </div>
 
+    <!-- ===== UNLOCK MODAL ===== -->
     <div class="modal" id="unlockModal">
         <div class="modal-content">
             <div class="modal-header" data-lang="unlockNote">Unlock Note</div>
-            <div class="modal-body">
-                <input type="password" class="modal-input" id="unlockPassword" data-lang-placeholder="password" placeholder="Password">
-                <div class="error-message" id="unlockError" data-lang="wrongPassword">Wrong password!</div>
-            </div>
+            <input type="password" class="modal-input" id="unlockPassword" placeholder="Password">
+            <div class="error-message" id="unlockError" data-lang="wrongPassword">Wrong password!</div>
             <div class="modal-actions">
                 <button class="modal-btn modal-btn-secondary" onclick="closeUnlockModal()" data-lang="cancel">Cancel</button>
                 <button class="modal-btn modal-btn-primary" onclick="unlockNote()" data-lang="unlock">Unlock</button>
@@ -942,14 +667,13 @@
         </div>
     </div>
 
+    <!-- ===== TAG MODAL ===== -->
     <div class="modal" id="tagModal">
         <div class="modal-content">
             <div class="modal-header" data-lang="addTags">Add Tags</div>
-            <div class="modal-body">
-                <input type="text" class="modal-input" id="tagInput" data-lang-placeholder="tagsPlaceholder" placeholder="Enter tags separated by commas">
-                <div style="font-size: 12px; color: #6c757d; margin-top: 10px;">
-                    <span data-lang="currentTags">Current tags:</span> <span id="currentTags">None</span>
-                </div>
+            <input type="text" class="modal-input" id="tagInput" placeholder="Enter tags separated by commas">
+            <div style="font-size:12px;color:#6c757d;margin-top:10px;">
+                <span data-lang="currentTags">Current tags:</span> <span id="currentTags">None</span>
             </div>
             <div class="modal-actions">
                 <button class="modal-btn modal-btn-secondary" onclick="closeTagModal()" data-lang="cancel">Cancel</button>
@@ -958,14 +682,13 @@
         </div>
     </div>
 
+    <!-- ===== IMPORT MODAL ===== -->
     <div class="modal" id="importModal">
         <div class="modal-content">
             <div class="modal-header" data-lang="enterImportPassword">Enter Password to Import</div>
-            <div class="modal-body">
-                <input type="password" class="modal-input" id="importPassword" data-lang-placeholder="password" placeholder="Password">
-                <div class="error-message" id="importError" data-lang="wrongPassword">Wrong password!</div>
-                <input type="file" id="importFile" accept=".json" style="display: none;">
-            </div>
+            <input type="password" class="modal-input" id="importPassword" placeholder="Password">
+            <div class="error-message" id="importError" data-lang="wrongPassword">Wrong password!</div>
+            <input type="file" id="importFile" accept=".json" style="display:none;">
             <div class="modal-actions">
                 <button class="modal-btn modal-btn-secondary" onclick="closeImportModal()" data-lang="cancel">Cancel</button>
                 <button class="modal-btn modal-btn-primary" onclick="confirmImport()" data-lang="import">Import</button>
@@ -973,1112 +696,1229 @@
         </div>
     </div>
 
+    <!-- ===== HISTORY MODAL ===== -->
     <div class="modal" id="historyModal">
         <div class="modal-content">
             <div class="modal-header" data-lang="noteHistory">Note History</div>
-            <div class="modal-body" id="historyContent"></div>
+            <div id="historyContent"></div>
             <div class="modal-actions">
                 <button class="modal-btn modal-btn-secondary" onclick="closeHistoryModal()" data-lang="close">Close</button>
             </div>
         </div>
     </div>
 
+    <!-- ===== CALENDAR MODAL ===== -->
     <div class="modal" id="calendarModal">
         <div class="modal-content">
             <div class="modal-header" data-lang="calendar">Calendar</div>
-            <div class="modal-body" id="calendarContent"></div>
+            <div id="calendarContent"></div>
             <div class="modal-actions">
                 <button class="modal-btn modal-btn-secondary" onclick="closeCalendarModal()" data-lang="close">Close</button>
             </div>
         </div>
     </div>
 
+    <!-- ===== REMINDER ADD MODAL ===== -->
+    <div class="modal" id="reminderModal">
+        <div class="modal-content">
+            <div class="modal-header">⏰ <span data-lang="addReminder">Add Reminder</span></div>
+            <table class="reminder-table">
+                <tr>
+                    <th data-lang="title">Title</th>
+                    <th data-lang="dateLabel">Date</th>
+                    <th data-lang="timeLabel">Time</th>
+                    <th data-lang="descriptionLabel">Description</th>
+                </tr>
+                <tr>
+                    <td><input type="text" id="remTitle" placeholder="..."></td>
+                    <td><input type="date" id="remDate"></td>
+                    <td><input type="time" id="remTime"></td>
+                    <td><textarea id="remDesc" placeholder="..."></textarea></td>
+                </tr>
+            </table>
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-secondary" onclick="closeReminderModal()" data-lang="cancel">Cancel</button>
+                <button class="modal-btn modal-btn-primary" onclick="saveReminder()" data-lang="save">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== REMINDER LIST MODAL (next to archive) ===== -->
+    <div class="modal" id="reminderListModal">
+        <div class="modal-content" style="max-width:600px;">
+            <div class="modal-header">⏰ <span data-lang="myReminders">My Reminders</span></div>
+            <div id="savedRemindersList" class="saved-reminders"></div>
+            <div class="modal-actions" style="margin-top:15px;">
+                <button class="modal-btn modal-btn-secondary" onclick="closeReminderList()" data-lang="close">Close</button>
+                <button class="modal-btn modal-btn-primary" onclick="closeReminderList(); showReminderModal();" data-lang="addNew">+ Add New</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== SHIFT NOTE MODAL ===== -->
+    <div class="modal" id="shiftNoteModal">
+        <div class="modal-content" style="max-width:680px; padding:0; overflow:hidden; border-radius:12px;">
+            <div class="shift-header">
+                <div class="company-name">IRCA</div>
+                <div class="shift-label" id="shiftLabel">Select Shift</div>
+                <div class="shift-time" id="shiftTimeDisplay">–</div>
+            </div>
+            <div class="shift-body">
+                <!-- Shift selector -->
+                <div style="margin-bottom:14px;">
+                    <label style="font-size:12px;color:#6c757d;font-weight:600;">
+                        <span data-lang="selectShift">Select Shift</span>
+                    </label><br>
+                    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;">
+                        <button class="shift-pick-btn" onclick="pickShift('morning')" data-lang="shiftMorning">☀️ Morning 06:00–14:00</button>
+                        <button class="shift-pick-btn" onclick="pickShift('afternoon')" data-lang="shiftAfternoon">🌅 Afternoon 14:00–22:00</button>
+                        <button class="shift-pick-btn" onclick="pickShift('night')" data-lang="shiftNight">🌙 Night 22:00–06:00</button>
+                    </div>
+                </div>
+
+                <!-- Team Leader -->
+                <div class="shift-leader-row">
+                    <label data-lang="teamLeader">Team Leader:</label>
+                    <input type="text" id="shiftLeaderName" placeholder="Enter team leader name...">
+                </div>
+
+                <!-- Note area -->
+                <textarea class="shift-note-area" id="shiftNoteContent" placeholder="Write shift notes here..." style="font-size:18px; line-height:1.6;"></textarea>
+
+                <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:16px;">
+                    <button class="modal-btn modal-btn-secondary" onclick="closeShiftNote()" data-lang="cancel">Cancel</button>
+                    <button class="modal-btn modal-btn-primary" onclick="saveShiftNote()" data-lang="saveShift">Save Shift Note</button>
+                    <button class="modal-btn" onclick="printShiftNote()" style="background:#e83e8c;color:white;" data-lang="printShift">🖨️ Print</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .shift-pick-btn {
+            padding: 8px 14px; border: 2px solid #e9ecef; border-radius: 8px;
+            background: #f8f9fa; cursor: pointer; font-size: 13px; font-weight: 600;
+            transition: all 0.2s; color: #495057;
+        }
+        .shift-pick-btn:hover { border-color: #667eea; background: #f0f3ff; }
+        .shift-pick-btn.selected { border-color: #667eea; background: #667eea; color: white; }
+    </style>
+
     <div class="toast" id="toast"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
-        const translations = {
-            en: {
-                subtitle: "Process Logbook by Saad",
-                searchPlaceholder: "Search notes...",
-                allAuthors: "All Authors",
-                newNote: "New Note",
-                favorites: "Favorites",
-                backToAll: "Back to All Notes",
-                archive: "Archive",
-                calendar: "Calendar",
-                export: "Export",
-                import: "Import",
-                darkMode: "Dark",
-                statistics: "Statistics",
-                totalNotes: "Total Notes:",
-                favoritesCount: "Favorites:",
-                totalWords: "Total Words:",
-                lastUpdate: "Last Updated:",
-                never: "Never",
-                noteTitlePlaceholder: "Note Title...",
-                noteContentPlaceholder: "Start writing your note...",
-                wordCount: "Words:",
-                charCount: "Characters:",
-                saveNote: "💾 Save Note",
-                simpleNote: "Simple Note",
-                checklist: "Checklist",
-                instructions: "Instructions",
-                delete: "Delete",
-                reminder: "Reminder",
-                lock: "Lock",
-                history: "History",
-                edit: "Edit",
-                archiveBtn: "Archive",
-                createNewNote: "Create New Note",
-                authorName: "Your name",
-                noteTitle: "Note title",
-                cancel: "Cancel",
-                create: "Create",
-                close: "Close",
-                save: "Save",
-                unlock: "Unlock",
-                enterPassword: "Enter Password to Delete",
-                enterImportPassword: "Enter Password to Import",
-                password: "Password",
-                confirmPassword: "Confirm password",
-                wrongPassword: "Wrong password!",
-                setLock: "Set Personal Lock",
-                unlockNote: "Unlock Note",
-                addTags: "Add Tags",
-                tagsPlaceholder: "Enter tags separated by commas",
-                currentTags: "Current tags:",
-                noteHistory: "Note History",
-                fillAllFields: "⚠️ Please fill in all fields",
-                noteCreated: "📝 Note created!",
-                noteSaved: "💾 Note saved!",
-                selectNote: "⚠️ Please select a note first",
-                noteDeleted: "🗑️ Note deleted!",
-                noteArchived: "📦 Note archived!",
-                noteUnarchived: "📤 Note unarchived!",
-                noteLocked: "🔒 Note locked!",
-                noteUnlocked: "🔓 Note unlocked!",
-                passwordsDontMatch: "❌ Passwords don't match!",
-                reminderAdded: "⏰ Reminder added!",
-                tagsUpdated: "🏷️ Tags updated!",
-                notesImported: "📥 Notes imported!",
-                allNotesExported: "📤 All notes exported!",
-                pdfExported: "📄 PDF exported!",
-                showingFavorites: "⭐ Showing favorites",
-                showingArchive: "📦 Showing archive"
-            },
-            it: {
-                subtitle: "Registro Processi di Saad",
-                searchPlaceholder: "Cerca note...",
-                allAuthors: "Tutti gli Autori",
-                newNote: "Nuova Nota",
-                favorites: "Preferiti",
-                backToAll: "Torna a Tutte le Note",
-                archive: "Archivio",
-                calendar: "Calendario",
-                export: "Esporta",
-                import: "Importa",
-                darkMode: "Scuro",
-                statistics: "Statistiche",
-                totalNotes: "Note Totali:",
-                favoritesCount: "Preferiti:",
-                totalWords: "Parole Totali:",
-                lastUpdate: "Ultimo Aggiornamento:",
-                never: "Mai",
-                noteTitlePlaceholder: "Titolo Nota...",
-                noteContentPlaceholder: "Inizia a scrivere...",
-                wordCount: "Parole:",
-                charCount: "Caratteri:",
-                saveNote: "💾 Salva Nota",
-                simpleNote: "Nota Semplice",
-                checklist: "Lista di Controllo",
-                instructions: "Istruzioni",
-                delete: "Elimina",
-                reminder: "Promemoria",
-                lock: "Blocca",
-                history: "Cronologia",
-                edit: "Modifica",
-                archiveBtn: "Archivia",
-                createNewNote: "Crea Nuova Nota",
-                authorName: "Il tuo nome",
-                noteTitle: "Titolo della nota",
-                cancel: "Annulla",
-                create: "Crea",
-                close: "Chiudi",
-                save: "Salva",
-                unlock: "Sblocca",
-                enterPassword: "Inserisci Password per Eliminare",
-                enterImportPassword: "Inserisci Password per Importare",
-                password: "Password",
-                confirmPassword: "Conferma password",
-                wrongPassword: "Password errata!",
-                setLock: "Imposta Blocco",
-                unlockNote: "Sblocca Nota",
-                addTags: "Aggiungi Tag",
-                tagsPlaceholder: "Inserisci tag separati da virgole",
-                currentTags: "Tag attuali:",
-                noteHistory: "Cronologia Nota",
-                fillAllFields: "⚠️ Compila tutti i campi",
-                noteCreated: "📝 Nota creata!",
-                noteSaved: "💾 Nota salvata!",
-                selectNote: "⚠️ Seleziona prima una nota",
-                noteDeleted: "🗑️ Nota eliminata!",
-                noteArchived: "📦 Nota archiviata!",
-                noteUnarchived: "📤 Nota estratta!",
-                noteLocked: "🔒 Nota bloccata!",
-                noteUnlocked: "🔓 Nota sbloccata!",
-                passwordsDontMatch: "❌ Le password non corrispondono!",
-                reminderAdded: "⏰ Promemoria aggiunto!",
-                tagsUpdated: "🏷️ Tag aggiornati!",
-                notesImported: "📥 Note importate!",
-                allNotesExported: "📤 Note esportate!",
-                pdfExported: "📄 PDF esportato!",
-                showingFavorites: "⭐ Mostrando preferiti",
-                showingArchive: "📦 Mostrando archivio"
-            }
+    // ============================================================
+    // TRANSLATIONS
+    // ============================================================
+    const translations = {
+        en: {
+            subtitle:"Process Logbook by Saad", searchPlaceholder:"Search notes...",
+            allAuthors:"All Authors", newNote:"New Note", favorites:"Favorites",
+            backToAll:"Back to All Notes", archive:"Archive", calendar:"Calendar",
+            export:"Export", import:"Import", darkMode:"Dark",
+            statistics:"Statistics", totalNotes:"Total Notes:", favoritesCount:"Favorites:",
+            totalWords:"Total Words:", lastUpdate:"Last Updated:", never:"Never",
+            noteTitlePlaceholder:"Note Title...", noteContentPlaceholder:"Start writing your note...",
+            wordCount:"Words:", charCount:"Characters:", saveNote:"💾 Save Note",
+            simpleNote:"Simple Note", checklist:"Checklist", instructions:"Instructions",
+            delete:"Delete", reminder:"Reminder", lock:"Lock", history:"History",
+            edit:"Edit", archiveBtn:"Archive",
+            createNewNote:"Create New Note", authorName:"Your name", noteTitle:"Note title",
+            cancel:"Cancel", create:"Create", close:"Close", save:"Save", unlock:"Unlock",
+            enterPassword:"Enter Password to Delete", enterImportPassword:"Enter Password to Import",
+            password:"Password", confirmPassword:"Confirm password", wrongPassword:"Wrong password!",
+            setLock:"Set Personal Lock", unlockNote:"Unlock Note",
+            addTags:"Add Tags", tagsPlaceholder:"Enter tags separated by commas",
+            currentTags:"Current tags:", noteHistory:"Note History",
+            fillAllFields:"⚠️ Please fill in all fields", noteCreated:"📝 Note created!",
+            noteSaved:"💾 Note saved!", selectNote:"⚠️ Please select a note first",
+            noteDeleted:"🗑️ Note deleted!", noteArchived:"📦 Note archived!",
+            noteUnarchived:"📤 Note unarchived!", noteLocked:"🔒 Note locked!",
+            noteUnlocked:"🔓 Note unlocked!", passwordsDontMatch:"❌ Passwords don't match!",
+            reminderAdded:"⏰ Reminder added!", tagsUpdated:"🏷️ Tags updated!",
+            notesImported:"📥 Notes imported!", allNotesExported:"📤 All notes exported!",
+            pdfExported:"📄 PDF exported!", showingFavorites:"⭐ Showing favorites",
+            showingArchive:"📦 Showing archive",
+            // Reminder
+            addReminder:"Add Reminder", title:"Title", dateLabel:"Date",
+            timeLabel:"Time", descriptionLabel:"Description",
+            myReminders:"My Reminders", addNew:"+ Add New",
+            // Shift
+            shiftNote:"Shift Note", createShiftNote:"Create Shift Note", viewShiftNotes:"View Shift Notes", selectShift:"Select Shift",
+            shiftMorning:"☀️ Morning 06:00–14:00", shiftAfternoon:"🌅 Afternoon 14:00–22:00",
+            shiftNight:"🌙 Night 22:00–06:00", teamLeader:"Team Leader:",
+            saveShift:"Save Shift Note", printShift:"🖨️ Print",
+            shiftSaved:"🏭 Shift note saved!"
+        },
+        it: {
+            subtitle:"Registro Processi di Saad", searchPlaceholder:"Cerca note...",
+            allAuthors:"Tutti gli Autori", newNote:"Nuova Nota", favorites:"Preferiti",
+            backToAll:"Torna a Tutte le Note", archive:"Archivio", calendar:"Calendario",
+            export:"Esporta", import:"Importa", darkMode:"Scuro",
+            statistics:"Statistiche", totalNotes:"Note Totali:", favoritesCount:"Preferiti:",
+            totalWords:"Parole Totali:", lastUpdate:"Ultimo Aggiornamento:", never:"Mai",
+            noteTitlePlaceholder:"Titolo Nota...", noteContentPlaceholder:"Inizia a scrivere...",
+            wordCount:"Parole:", charCount:"Caratteri:", saveNote:"💾 Salva Nota",
+            simpleNote:"Nota Semplice", checklist:"Lista di Controllo", instructions:"Istruzioni",
+            delete:"Elimina", reminder:"Promemoria", lock:"Blocca", history:"Cronologia",
+            edit:"Modifica", archiveBtn:"Archivia",
+            createNewNote:"Crea Nuova Nota", authorName:"Il tuo nome", noteTitle:"Titolo della nota",
+            cancel:"Annulla", create:"Crea", close:"Chiudi", save:"Salva", unlock:"Sblocca",
+            enterPassword:"Inserisci Password per Eliminare", enterImportPassword:"Inserisci Password per Importare",
+            password:"Password", confirmPassword:"Conferma password", wrongPassword:"Password errata!",
+            setLock:"Imposta Blocco", unlockNote:"Sblocca Nota",
+            addTags:"Aggiungi Tag", tagsPlaceholder:"Inserisci tag separati da virgole",
+            currentTags:"Tag attuali:", noteHistory:"Cronologia Nota",
+            fillAllFields:"⚠️ Compila tutti i campi", noteCreated:"📝 Nota creata!",
+            noteSaved:"💾 Nota salvata!", selectNote:"⚠️ Seleziona prima una nota",
+            noteDeleted:"🗑️ Nota eliminata!", noteArchived:"📦 Nota archiviata!",
+            noteUnarchived:"📤 Nota estratta!", noteLocked:"🔒 Nota bloccata!",
+            noteUnlocked:"🔓 Nota sbloccata!", passwordsDontMatch:"❌ Le password non corrispondono!",
+            reminderAdded:"⏰ Promemoria aggiunto!", tagsUpdated:"🏷️ Tag aggiornati!",
+            notesImported:"📥 Note importate!", allNotesExported:"📤 Note esportate!",
+            pdfExported:"📄 PDF esportato!", showingFavorites:"⭐ Mostrando preferiti",
+            showingArchive:"📦 Mostrando archivio",
+            // Reminder
+            addReminder:"Aggiungi Promemoria", title:"Titolo", dateLabel:"Data",
+            timeLabel:"Ora", descriptionLabel:"Descrizione",
+            myReminders:"I Miei Promemoria", addNew:"+ Aggiungi Nuovo",
+            // Shift
+            shiftNote:"Nota Turno", createShiftNote:"Crea Nota Turno", viewShiftNotes:"Vedi Note Turno", selectShift:"Seleziona Turno",
+            shiftMorning:"☀️ Mattina 06:00–14:00", shiftAfternoon:"🌅 Pomeriggio 14:00–22:00",
+            shiftNight:"🌙 Notte 22:00–06:00", teamLeader:"Capo Turno:",
+            saveShift:"Salva Nota Turno", printShift:"🖨️ Stampa",
+            shiftSaved:"🏭 Nota turno salvata!"
+        }
+    };
+
+    const templates = {
+        en: {
+            note:`\n📝 NOTE\n========================\nDate: DATE_PLACEHOLDER\nTime: TIME_PLACEHOLDER\n\nWrite your note here...\n\n`,
+            instructions:`\n📖 INSTRUCTIONS\n========================\nTask: \nDate: DATE_PLACEHOLDER\n\nSTEPS:\n1. Open Atritor program\n2. \n3. \n4. \n\nIMPORTANT:\n⚠️ \n\n`,
+            checklist:`\n✅ CHECKLIST\n========================\nDate: DATE_PLACEHOLDER\n\n☐ \n☐ \n☐ \n☐ \n\n`
+        },
+        it: {
+            note:`\n📝 NOTA\n========================\nData: DATE_PLACEHOLDER\nOra: TIME_PLACEHOLDER\n\nScrivi la tua nota qui...\n\n`,
+            instructions:`\n📖 ISTRUZIONI\n========================\nAttività: \nData: DATE_PLACEHOLDER\n\nPASSAGGI:\n1. Apri il programma Atritor\n2. \n3. \n4. \n\nIMPORTANTE:\n⚠️ \n\n`,
+            checklist:`\n✅ LISTA DI CONTROLLO\n========================\nData: DATE_PLACEHOLDER\n\n☐ \n☐ \n☐ \n☐ \n\n`
+        }
+    };
+
+    // ============================================================
+    // STATE
+    // ============================================================
+    let currentLang = 'en';
+    let notes = [];
+    let activityLog = [];  // Track all movements and deleted notes
+    let reminders = [];
+    let currentNoteId = null;
+    let noteToDelete = null;
+    let showingFavoritesOnly = false;
+    let showingArchiveOnly = false;
+    let showingShiftNotesOnly = false;
+    let selectedShift = null;
+    let activeNotifications = []; // track vibrating notifications
+    let reminderCheckInterval = null;
+
+    // ============================================================
+    // LANGUAGE
+    // ============================================================
+    function toggleLanguageDropdown() {
+        document.getElementById('langDropdown').classList.toggle('active');
+    }
+
+    function switchLanguage(lang) {
+        currentLang = lang;
+        document.getElementById('langDropdown').classList.remove('active');
+
+        const flagEl = document.getElementById('currentLangFlag');
+        flagEl.className = 'lang-flag ' + (lang === 'en' ? 'flag-gb' : 'flag-it');
+        document.getElementById('currentLangText').textContent = lang === 'en' ? 'English' : 'Italiano';
+
+        document.querySelectorAll('[data-lang]').forEach(el => {
+            const key = el.getAttribute('data-lang');
+            if (translations[lang][key] !== undefined) el.textContent = translations[lang][key];
+        });
+        document.querySelectorAll('[data-lang-placeholder]').forEach(el => {
+            const key = el.getAttribute('data-lang-placeholder');
+            if (translations[lang][key]) el.placeholder = translations[lang][key];
+        });
+
+        localStorage.setItem('language', lang);
+        updateAuthorFilter();
+        renderNotesList();
+    }
+
+    // ============================================================
+    // NOTES CRUD
+    // ============================================================
+    function loadNotes() {
+        const saved = localStorage.getItem('shiftNotes');
+        if (saved) { notes = JSON.parse(saved); }
+        const savedRem = localStorage.getItem('shiftReminders');
+        if (savedRem) { reminders = JSON.parse(savedRem); }
+        const savedLog = localStorage.getItem('activityLog');
+        if (savedLog) { activityLog = JSON.parse(savedLog); }
+        renderNotesList();
+        updateStats();
+        updateAuthorFilter();
+        updateReminderBadge();
+    }
+
+    function saveNotes() {
+        localStorage.setItem('shiftNotes', JSON.stringify(notes));
+        updateStats();
+        updateAuthorFilter();
+    }
+
+    function saveActivityLog() {
+        localStorage.setItem('activityLog', JSON.stringify(activityLog));
+    }
+
+    function logActivity(action, details) {
+        activityLog.unshift({
+            timestamp: new Date().toISOString(),
+            action: action,
+            details: details
+        });
+        if (activityLog.length > 100) activityLog.pop(); // Keep last 100 activities
+        saveActivityLog();
+    }
+
+    function saveReminders() {
+        localStorage.setItem('shiftReminders', JSON.stringify(reminders));
+        updateReminderBadge();
+    }
+
+    function updateAuthorFilter() {
+        const select = document.getElementById('authorFilter');
+        const currentValue = select.value;
+        const authors = [...new Set(notes.map(n => n.author))].sort();
+        select.innerHTML = `<option value="">${translations[currentLang].allAuthors}</option>`;
+        authors.forEach(a => { const o = document.createElement('option'); o.value = a; o.textContent = a; select.appendChild(o); });
+        select.value = currentValue;
+    }
+
+    function filterByAuthor() {
+        showingFavoritesOnly = false; showingArchiveOnly = false;
+        updateFavoritesButton(); renderNotesList();
+    }
+
+    function showFavorites() {
+        showingFavoritesOnly = !showingFavoritesOnly;
+        showingArchiveOnly = false;
+        showingShiftNotesOnly = false;
+        document.getElementById('authorFilter').value = '';
+        updateFavoritesButton(); renderNotesList();
+        showToast(showingFavoritesOnly ? translations[currentLang].showingFavorites : '');
+    }
+
+    function updateFavoritesButton() {
+        const btn = document.getElementById('favoritesBtn');
+        if (showingFavoritesOnly || showingShiftNotesOnly) {
+            btn.className = 'btn btn-back';
+            btn.innerHTML = `<span>◀</span><span>${translations[currentLang].backToAll}</span>`;
+        } else {
+            btn.className = 'btn btn-favorites';
+            btn.innerHTML = `<span>⭐</span><span>${translations[currentLang].favorites}</span>`;
+        }
+    }
+
+    function showArchive() {
+        showingArchiveOnly = !showingArchiveOnly;
+        showingFavoritesOnly = false;
+        showingShiftNotesOnly = false;
+        document.getElementById('authorFilter').value = '';
+        updateFavoritesButton(); updateArchiveButton(); renderNotesList();
+        showToast(showingArchiveOnly ? translations[currentLang].showingArchive : '');
+    }
+
+    function updateArchiveButton() {
+        const btn = document.querySelector('[onclick="showArchive()"]');
+        if (showingArchiveOnly) {
+            btn.style.background = '#dc3545'; btn.style.color = 'white';
+            btn.innerHTML = `<span>◀</span><span>${currentLang === 'en' ? 'Back to Notes' : 'Torna alle Note'}</span>`;
+        } else {
+            btn.style.background = '#e9ecef'; btn.style.color = '#495057';
+            btn.innerHTML = `<span>📦</span><span>${translations[currentLang].archive}</span>`;
+        }
+    }
+
+    // ============================================================
+    // NEW NOTE
+    // ============================================================
+    function showNewNoteModal() { document.getElementById('newNoteModal').classList.add('active'); document.getElementById('newNoteAuthor').value=''; document.getElementById('newNoteTitle').value=''; }
+    function closeNewNoteModal() { document.getElementById('newNoteModal').classList.remove('active'); }
+
+    function createNoteWithDetails() {
+        const author = document.getElementById('newNoteAuthor').value.trim();
+        const title = document.getElementById('newNoteTitle').value.trim();
+        if (!author || !title) { showToast(translations[currentLang].fillAllFields); return; }
+
+        const note = {
+            id: Date.now(), author, title, content:'',
+            createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(),
+            tags:[], favorite:false, pinned:false, archived:false,
+            color:'#ffffff', locked:false, lockPassword:'', history:[]
         };
+        notes.unshift(note); saveNotes(); renderNotesList();
+        logActivity('CREATE', { title, author });
+        selectNote(note.id, true); closeNewNoteModal();
+        showToast(translations[currentLang].noteCreated);
+    }
 
-        const templates = {
-            en: {
-                note: `\n📝 NOTE\n========================\nDate: DATE_PLACEHOLDER\nTime: TIME_PLACEHOLDER\n\nWrite your note here...\n\n`,
-                instructions: `\n📖 INSTRUCTIONS\n========================\nTask: \nDate: DATE_PLACEHOLDER\n\nSTEPS:\n1. Open Atritor program\n2. \n3. \n4. \n\nIMPORTANT:\n⚠️ \n\n`,
-                checklist: `\n✅ CHECKLIST\n========================\nDate: DATE_PLACEHOLDER\n\n☐ \n☐ \n☐ \n☐ \n\n`
-            },
-            it: {
-                note: `\n📝 NOTA\n========================\nData: DATE_PLACEHOLDER\nOra: TIME_PLACEHOLDER\n\nScrivi la tua nota qui...\n\n`,
-                instructions: `\n📖 ISTRUZIONI\n========================\nAttività: \nData: DATE_PLACEHOLDER\n\nPASSAGGI:\n1. Apri il programma Atritor\n2. \n3. \n4. \n\nIMPORTANTE:\n⚠️ \n\n`,
-                checklist: `\n✅ LISTA DI CONTROLLO\n========================\nData: DATE_PLACEHOLDER\n\n☐ \n☐ \n☐ \n☐ \n\n`
-            }
-        };
+    // ============================================================
+    // RENDER NOTES LIST
+    // ============================================================
+    function renderNotesList() {
+        const container = document.getElementById('notesList');
+        const authorFilter = document.getElementById('authorFilter').value;
+        let filtered = notes;
+        if (authorFilter) filtered = filtered.filter(n => n.author === authorFilter);
+        if (showingFavoritesOnly) filtered = filtered.filter(n => n.favorite && !n.archived);
+        if (showingShiftNotesOnly) filtered = filtered.filter(n => n.isShiftNote && !n.archived);
+        if (showingArchiveOnly) filtered = filtered.filter(n => n.archived);
+        else if (!showingShiftNotesOnly) filtered = filtered.filter(n => !n.archived);
 
-        let currentLang = 'en';
-        let notes = [];
-        let currentNoteId = null;
-        let noteToDelete = null;
-        let showingFavoritesOnly = false;
-        let showingArchiveOnly = false;
+        const sorted = [...filtered].sort((a,b) => {
+            if (a.pinned && !b.pinned) return -1;
+            if (!a.pinned && b.pinned) return 1;
+            return new Date(b.updatedAt) - new Date(a.updatedAt);
+        });
 
-        function toggleLanguageDropdown() {
-            document.getElementById('langDropdown').classList.toggle('active');
-        }
+        container.innerHTML = sorted.map(note => {
+            const preview = note.content.substring(0,50);
+            const date = new Date(note.updatedAt).toLocaleDateString();
+            return `
+            <div class="note-item ${note.id===currentNoteId?'active':''} ${note.archived?'archived':''}"
+                 onclick="selectNote(${note.id})" style="background:${note.color};">
+                <div class="note-icons">
+                    <button class="note-icon-btn" onclick="event.stopPropagation();togglePinFromList(${note.id})">${note.pinned?'📍':'📌'}</button>
+                    <button class="note-icon-btn" onclick="event.stopPropagation();toggleFavoriteFromList(${note.id})">${note.favorite?'⭐':'☆'}</button>
+                    ${note.locked?'<span>🔒</span>':''}
+                </div>
+                <h3>${note.title}</h3>
+                <p>${preview}${note.content.length>50?'...':''}</p>
+                <div class="note-meta"><span>👤 ${note.author}</span><span>📅 ${date}</span></div>
+                <div class="note-actions">
+                    <button class="note-action-btn note-action-edit" onclick="event.stopPropagation();editNote(${note.id})">${translations[currentLang].edit}</button>
+                    <button class="note-action-btn note-action-delete" onclick="event.stopPropagation();deleteNoteFromList(${note.id})">${translations[currentLang].delete}</button>
+                    <button class="note-action-btn note-action-archive" onclick="event.stopPropagation();toggleArchive(${note.id})">${note.archived ? translations[currentLang].archive : translations[currentLang].archive}</button>
+                </div>
+            </div>`;
+        }).join('');
+    }
 
-        function switchLanguage(lang) {
-            currentLang = lang;
-            document.getElementById('langDropdown').classList.remove('active');
-            
-            if (lang === 'en') {
-                document.getElementById('currentLangFlag').textContent = '🇬🇧';
-                document.getElementById('currentLangText').textContent = 'English';
-            } else {
-                document.getElementById('currentLangFlag').textContent = '🇮🇹';
-                document.getElementById('currentLangText').textContent = 'Italiano';
-            }
+    function togglePinFromList(id) { const n=notes.find(n=>n.id===id); if(n){n.pinned=!n.pinned;saveNotes();renderNotesList();} }
+    function toggleFavoriteFromList(id) { const n=notes.find(n=>n.id===id); if(n){n.favorite=!n.favorite;saveNotes();renderNotesList();} }
+    function toggleArchive(id) {
+        const n=notes.find(n=>n.id===id);
+        if(n){ n.archived=!n.archived; saveNotes(); renderNotesList();
+            showToast(n.archived ? translations[currentLang].noteArchived : translations[currentLang].noteUnarchived); }
+    }
+    function deleteNoteFromList(id) { noteToDelete=id; showDeleteModal(); }
 
-            document.querySelectorAll('[data-lang]').forEach(el => {
-                const key = el.getAttribute('data-lang');
-                // Skip subtitle - always keep in English
-                if (key !== 'subtitle') {
-                    el.textContent = translations[lang][key];
-                }
-            });
+    // ============================================================
+    // SELECT / EDIT NOTE
+    // ============================================================
+    function selectNote(id, editMode=false) {
+        const note = notes.find(n=>n.id===id);
+        if (!note) return;
 
-            document.querySelectorAll('[data-lang-placeholder]').forEach(el => {
-                el.placeholder = translations[lang][el.getAttribute('data-lang-placeholder')];
-            });
-
-            localStorage.setItem('language', lang);
-            updateAuthorFilter();
-        }
-
-        function loadNotes() {
-            const saved = localStorage.getItem('shiftNotes');
-            if (saved) {
-                notes = JSON.parse(saved);
-                renderNotesList();
-                updateStats();
-                updateAuthorFilter();
-            }
-        }
-
-        function saveNotes() {
-            localStorage.setItem('shiftNotes', JSON.stringify(notes));
-            updateStats();
-            updateAuthorFilter();
-        }
-
-        function updateAuthorFilter() {
-            const select = document.getElementById('authorFilter');
-            const currentValue = select.value;
-            const authors = [...new Set(notes.map(n => n.author))].sort();
-            
-            select.innerHTML = `<option value="">${translations[currentLang].allAuthors}</option>`;
-            authors.forEach(author => {
-                const option = document.createElement('option');
-                option.value = author;
-                option.textContent = author;
-                select.appendChild(option);
-            });
-            
-            select.value = currentValue;
-        }
-
-        function filterByAuthor() {
-            showingFavoritesOnly = false;
-            showingArchiveOnly = false;
-            updateFavoritesButton();
-            renderNotesList();
-        }
-
-        function showFavorites() {
-            showingFavoritesOnly = !showingFavoritesOnly;
-            showingArchiveOnly = false;
-            document.getElementById('authorFilter').value = '';
-            updateFavoritesButton();
-            renderNotesList();
-            showToast(showingFavoritesOnly ? translations[currentLang].showingFavorites : '');
-        }
-
-        function updateFavoritesButton() {
-            const btn = document.getElementById('favoritesBtn');
-            if (showingFavoritesOnly) {
-                btn.className = 'btn btn-back';
-                btn.innerHTML = `<span>◀</span><span data-lang="backToAll">${translations[currentLang].backToAll}</span>`;
-            } else {
-                btn.className = 'btn btn-favorites';
-                btn.innerHTML = `<span>⭐</span><span data-lang="favorites">${translations[currentLang].favorites}</span>`;
-            }
-        }
-
-        function showArchive() {
-            showingArchiveOnly = !showingArchiveOnly;
-            showingFavoritesOnly = false;
-            document.getElementById('authorFilter').value = '';
-            updateFavoritesButton();
-            updateArchiveButton();
-            renderNotesList();
-            showToast(showingArchiveOnly ? translations[currentLang].showingArchive : '');
-        }
-
-        function updateArchiveButton() {
-            const btn = document.querySelector('[onclick="showArchive()"]');
-            if (showingArchiveOnly) {
-                btn.style.background = '#dc3545';
-                btn.style.color = 'white';
-                btn.innerHTML = `<span>◀</span><span>${currentLang === 'en' ? 'Back to Notes' : 'Torna alle Note'}</span>`;
-            } else {
-                btn.style.background = '#e9ecef';
-                btn.style.color = '#495057';
-                btn.innerHTML = `<span>📦</span><span data-lang="archive">${translations[currentLang].archive}</span>`;
-            }
-        }
-
-        function showNewNoteModal() {
-            document.getElementById('newNoteModal').classList.add('active');
-            document.getElementById('newNoteAuthor').value = '';
-            document.getElementById('newNoteTitle').value = '';
-        }
-
-        function closeNewNoteModal() {
-            document.getElementById('newNoteModal').classList.remove('active');
-        }
-
-        function createNoteWithDetails() {
-            const author = document.getElementById('newNoteAuthor').value.trim();
-            const title = document.getElementById('newNoteTitle').value.trim();
-
-            if (!author || !title) {
-                showToast(translations[currentLang].fillAllFields);
-                return;
-            }
-
-            const note = {
-                id: Date.now(),
-                author: author,
-                title: title,
-                content: '',
-                createdAt: new Date().toISOString(),
-                updatedAt: new Date().toISOString(),
-                tags: [],
-                favorite: false,
-                pinned: false,
-                archived: false,
-                color: '#ffffff',
-                locked: false,
-                lockPassword: '',
-                history: []
-            };
-
-            notes.unshift(note);
-            saveNotes();
-            renderNotesList();
-            selectNote(note.id, true); // Open in edit mode
-            closeNewNoteModal();
-            showToast(translations[currentLang].noteCreated);
-        }
-
-        function renderNotesList() {
-            const container = document.getElementById('notesList');
-            const authorFilter = document.getElementById('authorFilter').value;
-            
-            let filteredNotes = notes;
-            if (authorFilter) {
-                filteredNotes = notes.filter(n => n.author === authorFilter);
-            }
-            if (showingFavoritesOnly) {
-                filteredNotes = filteredNotes.filter(n => n.favorite && !n.archived);
-            }
-            if (showingArchiveOnly) {
-                filteredNotes = filteredNotes.filter(n => n.archived);
-            } else {
-                filteredNotes = filteredNotes.filter(n => !n.archived);
-            }
-            
-            const sortedNotes = [...filteredNotes].sort((a, b) => {
-                if (a.pinned && !b.pinned) return -1;
-                if (!a.pinned && b.pinned) return 1;
-                return new Date(b.updatedAt) - new Date(a.updatedAt);
-            });
-
-            container.innerHTML = sortedNotes.map(note => {
-                const preview = note.content.substring(0, 50);
-                const date = new Date(note.updatedAt).toLocaleDateString();
-                return `
-                    <div class="note-item ${note.id === currentNoteId ? 'active' : ''} ${note.archived ? 'archived' : ''}" 
-                         onclick="selectNote(${note.id})"
-                         style="background: ${note.color};">
-                        <div class="note-icons">
-                            <button class="note-icon-btn" onclick="event.stopPropagation(); togglePinFromList(${note.id})">
-                                ${note.pinned ? '📍' : '📌'}
-                            </button>
-                            <button class="note-icon-btn" onclick="event.stopPropagation(); toggleFavoriteFromList(${note.id})">
-                                ${note.favorite ? '⭐' : '☆'}
-                            </button>
-                            ${note.locked ? '<span>🔒</span>' : ''}
-                        </div>
-                        <h3>${note.title}</h3>
-                        <p>${preview}${note.content.length > 50 ? '...' : ''}</p>
-                        <div class="note-meta">
-                            <span>👤 ${note.author}</span>
-                            <span>📅 ${date}</span>
-                        </div>
-                        <div class="note-actions">
-                            <button class="note-action-btn note-action-edit" onclick="event.stopPropagation(); editNote(${note.id})">
-                                ${translations[currentLang].edit}
-                            </button>
-                            <button class="note-action-btn note-action-delete" onclick="event.stopPropagation(); deleteNoteFromList(${note.id})">
-                                ${translations[currentLang].delete}
-                            </button>
-                            <button class="note-action-btn note-action-archive" onclick="event.stopPropagation(); toggleArchive(${note.id})">
-                                ${note.archived ? '📤' : '📦'}
-                            </button>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        function togglePinFromList(id) {
-            const note = notes.find(n => n.id === id);
-            if (note) {
-                note.pinned = !note.pinned;
-                saveNotes();
-                renderNotesList();
-            }
-        }
-
-        function toggleFavoriteFromList(id) {
-            const note = notes.find(n => n.id === id);
-            if (note) {
-                note.favorite = !note.favorite;
-                saveNotes();
-                renderNotesList();
-            }
-        }
-
-        function toggleArchive(id) {
-            const note = notes.find(n => n.id === id);
-            if (note) {
-                note.archived = !note.archived;
-                saveNotes();
-                renderNotesList();
-                showToast(note.archived ? translations[currentLang].noteArchived : translations[currentLang].noteUnarchived);
-            }
-        }
-
-        function deleteNoteFromList(id) {
-            noteToDelete = id;
-            showDeleteModal();
-        }
-
-        function selectNote(id, editMode = false) {
-            const note = notes.find(n => n.id === id);
-            if (!note) return;
-
-            if (note.locked && !editMode) {
-                currentNoteId = id;
-                document.getElementById('unlockModal').classList.add('active');
-                document.getElementById('unlockPassword').value = '';
-                document.getElementById('unlockError').classList.remove('show');
-                return;
-            }
-
+        if (note.locked && !editMode) {
             currentNoteId = id;
-            document.getElementById('noteTitle').value = note.title;
-            document.getElementById('noteContent').value = note.content;
-            
-            // Read-only mode by default
-            if (!editMode) {
-                document.getElementById('noteTitle').disabled = true;
-                document.getElementById('noteContent').disabled = true;
-                document.getElementById('saveBtn').disabled = true;
-            } else {
-                // Edit mode when Edit button is clicked
-                document.getElementById('noteTitle').disabled = false;
-                document.getElementById('noteContent').disabled = false;
-                document.getElementById('saveBtn').disabled = false;
-            }
-            
-            document.getElementById('currentColor').style.background = note.color;
-            document.getElementById('noteContent').style.background = note.color;
-
-            updateWordCount();
-            renderNotesList();
+            document.getElementById('unlockModal').classList.add('active');
+            document.getElementById('unlockPassword').value='';
+            document.getElementById('unlockError').classList.remove('show');
+            return;
         }
 
-        function editNote(id) {
-            selectNote(id, true);
-        }
+        currentNoteId = id;
+        document.getElementById('noteTitle').value = note.title;
+        document.getElementById('noteContent').value = note.content;
 
-        function clearEditor() {
-            currentNoteId = null;
-            document.getElementById('noteTitle').value = '';
-            document.getElementById('noteContent').value = '';
+        if (!editMode) {
             document.getElementById('noteTitle').disabled = true;
             document.getElementById('noteContent').disabled = true;
             document.getElementById('saveBtn').disabled = true;
-            document.getElementById('currentColor').style.background = 'white';
-            document.getElementById('noteContent').style.background = 'white';
-            renderNotesList();
+        } else {
+            document.getElementById('noteTitle').disabled = false;
+            document.getElementById('noteContent').disabled = false;
+            document.getElementById('saveBtn').disabled = false;
         }
 
-        function saveCurrentNote() {
-            if (!currentNoteId) {
-                showToast(translations[currentLang].selectNote);
-                return;
-            }
+        document.getElementById('currentColor').style.background = note.color;
+        document.getElementById('noteContent').style.background = note.color;
+        updateWordCount(); renderNotesList();
+    }
 
-            const note = notes.find(n => n.id === currentNoteId);
-            if (note) {
-                if (!note.history) note.history = [];
-                note.history.push({
-                    content: note.content,
-                    title: note.title,
-                    timestamp: new Date().toISOString()
-                });
-                if (note.history.length > 10) note.history.shift();
+    function editNote(id) { selectNote(id, true); }
 
-                note.title = document.getElementById('noteTitle').value;
-                note.content = document.getElementById('noteContent').value;
-                note.updatedAt = new Date().toISOString();
-                saveNotes();
-                showToast(translations[currentLang].noteSaved);
-                clearEditor();
-            }
+    function clearEditor() {
+        currentNoteId = null;
+        document.getElementById('noteTitle').value='';
+        document.getElementById('noteContent').value='';
+        document.getElementById('noteTitle').disabled=true;
+        document.getElementById('noteContent').disabled=true;
+        document.getElementById('saveBtn').disabled=true;
+        document.getElementById('currentColor').style.background='white';
+        document.getElementById('noteContent').style.background='white';
+        renderNotesList();
+    }
+
+    // ============================================================
+    // SAVE NOTE (manual only — auto-save disabled)
+    // ============================================================
+    function saveCurrentNote() {
+        if (!currentNoteId) { showToast(translations[currentLang].selectNote); return; }
+        const note = notes.find(n=>n.id===currentNoteId);
+        if (note) {
+            if (!note.history) note.history=[];
+            note.history.push({ content:note.content, title:note.title, timestamp:new Date().toISOString() });
+            if (note.history.length>10) note.history.shift();
+
+            note.title = document.getElementById('noteTitle').value;
+            note.content = document.getElementById('noteContent').value;
+            note.updatedAt = new Date().toISOString();
+            saveNotes(); showToast(translations[currentLang].noteSaved); clearEditor();
         }
+    }
 
-        function showDeleteModal() {
-            if (!noteToDelete && !currentNoteId) {
-                showToast(translations[currentLang].selectNote);
-                return;
-            }
-            if (!noteToDelete) noteToDelete = currentNoteId;
-            document.getElementById('passwordModal').classList.add('active');
-            document.getElementById('deletePassword').value = '';
-            document.getElementById('deleteError').classList.remove('show');
-        }
-
-        function closePasswordModal() {
-            document.getElementById('passwordModal').classList.remove('active');
-            document.getElementById('deleteError').classList.remove('show');
-            noteToDelete = null;
-        }
-
-        function confirmDelete() {
-            const password = document.getElementById('deletePassword').value;
-            if (password !== '7604') {
-                document.getElementById('deleteError').classList.add('show');
-                return;
-            }
-
-            if (noteToDelete) {
-                notes = notes.filter(n => n.id !== noteToDelete);
-                saveNotes();
-                if (currentNoteId === noteToDelete) {
-                    clearEditor();
-                }
-                renderNotesList();
-                closePasswordModal();
-                showToast(translations[currentLang].noteDeleted);
-            }
-        }
-
-        function addTemplate(type) {
-            const content = document.getElementById('noteContent');
-            let template = templates[currentLang][type];
-            
-            const now = new Date();
-            template = template.replace('DATE_PLACEHOLDER', now.toLocaleDateString());
-            template = template.replace('TIME_PLACEHOLDER', now.toLocaleTimeString());
-            
-            content.value += template;
-            updateWordCount();
-        }
-
-        function insertDateTime() {
-            const content = document.getElementById('noteContent');
-            const dateTime = `[${new Date().toLocaleString()}] `;
-            const start = content.selectionStart;
-            content.value = content.value.substring(0, start) + dateTime + content.value.substring(start);
-            content.focus();
-            updateWordCount();
-        }
-
-        function addReminder() {
-            const content = document.getElementById('noteContent');
-            const reminder = prompt(currentLang === 'en' ? 'Set a reminder:' : 'Imposta promemoria:');
-            if (reminder) {
-                const reminderText = `\n⏰ ${currentLang === 'en' ? 'REMINDER' : 'PROMEMORIA'}: ${reminder}\n${currentLang === 'en' ? 'Set on' : 'Impostato il'}: ${new Date().toLocaleString()}\n`;
-                content.value += reminderText;
-                updateWordCount();
-                showToast(translations[currentLang].reminderAdded);
-            }
-        }
-
-        function showLockModal() {
-            if (!currentNoteId) {
-                showToast(translations[currentLang].selectNote);
-                return;
-            }
-            document.getElementById('lockModal').classList.add('active');
-            document.getElementById('lockPassword').value = '';
-            document.getElementById('lockPasswordConfirm').value = '';
-            document.getElementById('lockError').classList.remove('show');
-        }
-
-        function closeLockModal() {
-            document.getElementById('lockModal').classList.remove('active');
-        }
-
-        function setLock() {
-            const password = document.getElementById('lockPassword').value;
-            const confirm = document.getElementById('lockPasswordConfirm').value;
-
-            if (password !== confirm) {
-                document.getElementById('lockError').textContent = translations[currentLang].passwordsDontMatch;
-                document.getElementById('lockError').classList.add('show');
-                return;
-            }
-
-            if (!password) {
-                document.getElementById('lockError').textContent = translations[currentLang].fillAllFields;
-                document.getElementById('lockError').classList.add('show');
-                return;
-            }
-
-            const note = notes.find(n => n.id === currentNoteId);
-            if (note) {
-                note.locked = true;
-                note.lockPassword = password;
-                saveNotes();
-                renderNotesList();
-                closeLockModal();
-                showToast(translations[currentLang].noteLocked);
-                clearEditor();
-            }
-        }
-
-        function closeUnlockModal() {
-            document.getElementById('unlockModal').classList.remove('active');
-            document.getElementById('unlockError').classList.remove('show');
-        }
-
-        function unlockNote() {
-            const password = document.getElementById('unlockPassword').value;
-            const note = notes.find(n => n.id === currentNoteId);
-
-            if (note && note.lockPassword === password) {
-                closeUnlockModal();
-                document.getElementById('noteTitle').value = note.title;
-                document.getElementById('noteContent').value = note.content;
-                document.getElementById('noteTitle').disabled = false;
-                document.getElementById('noteContent').disabled = false;
-                document.getElementById('saveBtn').disabled = false;
-                document.getElementById('currentColor').style.background = note.color;
-                document.getElementById('noteContent').style.background = note.color;
-                updateWordCount();
-                showToast(translations[currentLang].noteUnlocked);
-            } else {
-                document.getElementById('unlockError').classList.add('show');
-            }
-        }
-
-        function showTagModal() {
-            if (!currentNoteId) {
-                showToast(translations[currentLang].selectNote);
-                return;
-            }
-            const note = notes.find(n => n.id === currentNoteId);
-            document.getElementById('tagInput').value = note.tags ? note.tags.join(', ') : '';
-            document.getElementById('currentTags').textContent = note.tags && note.tags.length > 0 ? note.tags.join(', ') : 'None';
-            document.getElementById('tagModal').classList.add('active');
-        }
-
-        function closeTagModal() {
-            document.getElementById('tagModal').classList.remove('active');
-        }
-
-        function saveTags() {
-            const note = notes.find(n => n.id === currentNoteId);
-            if (note) {
-                const tagsInput = document.getElementById('tagInput').value;
-                note.tags = tagsInput.split(',').map(t => t.trim()).filter(t => t);
-                saveNotes();
-                closeTagModal();
-                showToast(translations[currentLang].tagsUpdated);
-            }
-        }
-
-        function showHistory() {
-            if (!currentNoteId) {
-                showToast(translations[currentLang].selectNote);
-                return;
-            }
-            const note = notes.find(n => n.id === currentNoteId);
-            const historyContent = document.getElementById('historyContent');
-
-            if (!note.history || note.history.length === 0) {
-                historyContent.innerHTML = '<p>No history available</p>';
-            } else {
-                historyContent.innerHTML = note.history.map((h, i) => `
-                    <div class="history-item" onclick="restoreVersion(${i})">
-                        <div class="history-time">${new Date(h.timestamp).toLocaleString()}</div>
-                        <div class="history-preview">${h.content.substring(0, 100)}...</div>
-                    </div>
-                `).join('');
-            }
-            document.getElementById('historyModal').classList.add('active');
-        }
-
-        function closeHistoryModal() {
-            document.getElementById('historyModal').classList.remove('active');
-        }
-
-        function restoreVersion(index) {
-            const note = notes.find(n => n.id === currentNoteId);
-            if (note && note.history[index]) {
-                const version = note.history[index];
-                document.getElementById('noteTitle').value = version.title;
-                document.getElementById('noteContent').value = version.content;
-                updateWordCount();
-                closeHistoryModal();
-                showToast('📜 Version restored!');
-            }
-        }
-
-        function toggleColorPicker() {
-            document.getElementById('colorOptions').classList.toggle('active');
-        }
-
-        function setNoteColor(color) {
-            if (!currentNoteId) return;
-            const note = notes.find(n => n.id === currentNoteId);
-            if (note) {
-                note.color = color;
-                document.getElementById('currentColor').style.background = color;
-                document.getElementById('noteContent').style.background = color;
-                saveNotes();
-                renderNotesList();
-                toggleColorPicker();
-            }
-        }
-
-        function printNote() {
-            if (!currentNoteId) {
-                showToast(translations[currentLang].selectNote);
-                return;
-            }
-
-            const note = notes.find(n => n.id === currentNoteId);
-            if (note) {
-                const printWindow = window.open('', '_blank');
-                printWindow.document.write(`
-                    <html>
-                    <head>
-                        <title>${note.title}</title>
-                        <style>
-                            body { font-family: Arial; padding: 40px; }
-                            h1 { color: #667eea; }
-                            .meta { color: #6c757d; margin-bottom: 20px; }
-                            .content { line-height: 1.8; white-space: pre-wrap; }
-                        </style>
-                    </head>
-                    <body>
-                        <h1>${note.title}</h1>
-                        <div class="meta">
-                            <strong>Author:</strong> ${note.author}<br>
-                            <strong>Created:</strong> ${new Date(note.createdAt).toLocaleString()}<br>
-                            <strong>Last Updated:</strong> ${new Date(note.updatedAt).toLocaleString()}
-                        </div>
-                        <div class="content">${note.content}</div>
-                    </body>
-                    </html>
-                `);
-                printWindow.document.close();
-                printWindow.print();
-            }
-        }
-
-        function exportToPDF() {
-            if (!currentNoteId) {
-                showToast(translations[currentLang].selectNote);
-                return;
-            }
-
-            const note = notes.find(n => n.id === currentNoteId);
-            if (note && typeof jspdf !== 'undefined') {
-                const { jsPDF } = window.jspdf;
-                const doc = new jsPDF();
-                
-                doc.setFontSize(20);
-                doc.text(note.title, 20, 20);
-                
-                doc.setFontSize(12);
-                doc.text(`Author: ${note.author}`, 20, 35);
-                doc.text(`Date: ${new Date(note.updatedAt).toLocaleString()}`, 20, 45);
-                
-                doc.setFontSize(11);
-                const lines = doc.splitTextToSize(note.content, 170);
-                doc.text(lines, 20, 60);
-                
-                doc.save(`${note.title}.pdf`);
-                showToast(translations[currentLang].pdfExported);
-            }
-        }
-
-        function duplicateNote() {
-            if (!currentNoteId) {
-                showToast(translations[currentLang].selectNote);
-                return;
-            }
-
-            const note = notes.find(n => n.id === currentNoteId);
-            if (note) {
-                const duplicate = {
-                    ...note,
-                    id: Date.now(),
-                    title: note.title + ' (Copy)',
-                    createdAt: new Date().toISOString(),
-                    updatedAt: new Date().toISOString(),
-                    pinned: false,
-                    locked: false,
-                    lockPassword: ''
-                };
-                notes.unshift(duplicate);
-                saveNotes();
-                renderNotesList();
-                selectNote(duplicate.id, true); // Open in edit mode
-            }
-        }
-
-        function exportAllNotes() {
-            if (notes.length === 0) return;
-            const dataStr = JSON.stringify(notes, null, 2);
-            const dataBlob = new Blob([dataStr], { type: 'application/json' });
-            const url = URL.createObjectURL(dataBlob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = `shiftnote-backup-${Date.now()}.json`;
-            link.click();
-            URL.revokeObjectURL(url);
-            showToast(translations[currentLang].allNotesExported);
-        }
-
-        function showImportModal() {
-            document.getElementById('importModal').classList.add('active');
-            document.getElementById('importPassword').value = '';
-            document.getElementById('importError').classList.remove('show');
-        }
-
-        function closeImportModal() {
-            document.getElementById('importModal').classList.remove('active');
-        }
-
-        function confirmImport() {
-            const password = document.getElementById('importPassword').value;
-            if (password !== '4067') {
-                document.getElementById('importError').classList.add('show');
-                return;
-            }
-            document.getElementById('importFile').click();
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('importFile').addEventListener('change', (e) => {
-                const file = e.target.files[0];
-                if (!file) return;
-
-                const reader = new FileReader();
-                reader.onload = (event) => {
-                    try {
-                        const importedNotes = JSON.parse(event.target.result);
-                        notes = importedNotes;
-                        saveNotes();
-                        renderNotesList();
-                        closeImportModal();
-                        showToast(translations[currentLang].notesImported);
-                    } catch (error) {
-                        showToast('❌ Invalid file');
-                    }
-                };
-                reader.readAsText(file);
-                e.target.value = '';
+    // ============================================================
+    // DELETE
+    // ============================================================
+    function showDeleteModal() {
+        if (!noteToDelete && !currentNoteId) { showToast(translations[currentLang].selectNote); return; }
+        if (!noteToDelete) noteToDelete=currentNoteId;
+        document.getElementById('passwordModal').classList.add('active');
+        document.getElementById('deletePassword').value='';
+        document.getElementById('deleteError').classList.remove('show');
+    }
+    function closePasswordModal() { document.getElementById('passwordModal').classList.remove('active'); noteToDelete=null; }
+    function confirmDelete() {
+        if (document.getElementById('deletePassword').value !== '7604') { document.getElementById('deleteError').classList.add('show'); return; }
+        const deletedNote = notes.find(n => n.id === noteToDelete);
+        if (deletedNote) {
+            logActivity('DELETE', {
+                title: deletedNote.title,
+                author: deletedNote.author,
+                content: deletedNote.content.substring(0, 100) + '...',
+                deletedAt: new Date().toISOString()
             });
+        }
+        notes = notes.filter(n=>n.id!==noteToDelete); saveNotes();
+        if (currentNoteId===noteToDelete) clearEditor();
+        renderNotesList(); closePasswordModal(); showToast(translations[currentLang].noteDeleted);
+    }
+
+    // ============================================================
+    // TEMPLATES
+    // ============================================================
+    function addTemplate(type) {
+        const content = document.getElementById('noteContent');
+        let t = templates[currentLang][type];
+        const now = new Date();
+        t = t.replace('DATE_PLACEHOLDER', now.toLocaleDateString()).replace('TIME_PLACEHOLDER', now.toLocaleTimeString());
+        content.value += t; updateWordCount();
+    }
+
+    function insertDateTime() {
+        const content = document.getElementById('noteContent');
+        const dt = `[${new Date().toLocaleString()}] `;
+        const s = content.selectionStart;
+        content.value = content.value.substring(0,s)+dt+content.value.substring(s);
+        content.focus(); updateWordCount();
+    }
+
+    // ============================================================
+    // REMINDER SYSTEM
+    // ============================================================
+    function showReminderModal() {
+        // Set today's date as default
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('remDate').value = today;
+        document.getElementById('remTime').value = '';
+        document.getElementById('remTitle').value = '';
+        document.getElementById('remDesc').value = '';
+        document.getElementById('reminderModal').classList.add('active');
+    }
+    function closeReminderModal() { document.getElementById('reminderModal').classList.remove('active'); }
+
+    function saveReminder() {
+        const title = document.getElementById('remTitle').value.trim();
+        const date = document.getElementById('remDate').value;
+        const time = document.getElementById('remTime').value;
+        const desc = document.getElementById('remDesc').value.trim();
+
+        if (!title || !date || !time) { showToast('⚠️ ' + (currentLang==='en'?'Fill Title, Date & Time':'Riempi Titolo, Data & Ora')); return; }
+
+        const triggerTime = new Date(date + 'T' + time);
+        reminders.push({ id: Date.now(), title, date, time, desc, triggerTime: triggerTime.toISOString(), dismissed: false });
+        saveReminders(); closeReminderModal();
+        showToast(translations[currentLang].reminderAdded);
+    }
+
+    function showReminderList() {
+        renderSavedReminders();
+        document.getElementById('reminderListModal').classList.add('active');
+    }
+    function closeReminderList() { document.getElementById('reminderListModal').classList.remove('active'); }
+
+    function renderSavedReminders() {
+        const container = document.getElementById('savedRemindersList');
+        if (reminders.length === 0) {
+            container.innerHTML = `<p style="color:#6c757d;text-align:center;padding:20px;">${currentLang==='en'?'No reminders yet':'Nessun promemoria ancora'}</p>`;
+            return;
+        }
+        // Sort: active (triggered, not dismissed) first, then upcoming, then dismissed
+        const sorted = [...reminders].sort((a,b) => {
+            const aActive = isReminderActive(a);
+            const bActive = isReminderActive(b);
+            if (aActive && !bActive) return -1;
+            if (!aActive && bActive) return 1;
+            return new Date(a.triggerTime) - new Date(b.triggerTime);
         });
 
-        function searchNotes() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            
-            if (navigator.vibrate && query) {
-                navigator.vibrate(50);
-            }
-            
-            const authorFilter = document.getElementById('authorFilter').value;
-            
-            let filtered = notes.filter(note => 
-                note.title.toLowerCase().includes(query) ||
-                note.content.toLowerCase().includes(query) ||
-                note.author.toLowerCase().includes(query)
-            );
+        container.innerHTML = sorted.map(r => {
+            const active = isReminderActive(r);
+            const triggerDate = new Date(r.triggerTime);
+            const dateStr = triggerDate.toLocaleDateString() + ' ' + triggerDate.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+            return `
+            <div class="saved-reminder-item ${active ? 'active-reminder' : ''}">
+                <div>
+                    <div class="sr-title">${r.title} ${active ? '🔔' : ''}</div>
+                    <div class="sr-time">📅 ${dateStr}</div>
+                    ${r.desc ? `<div class="sr-desc">📝 ${r.desc}</div>` : ''}
+                </div>
+                <button class="sr-delete" onclick="deleteReminder(${r.id})">🗑️</button>
+            </div>`;
+        }).join('');
+    }
 
-            if (authorFilter) {
-                filtered = filtered.filter(n => n.author === authorFilter);
-            }
+    function isReminderActive(r) {
+        return !r.dismissed && new Date(r.triggerTime) <= new Date();
+    }
 
-            if (showingFavoritesOnly) {
-                filtered = filtered.filter(n => n.favorite && !n.archived);
-            }
+    function deleteReminder(id) {
+        reminders = reminders.filter(r=>r.id!==id); saveReminders(); renderSavedReminders();
+    }
 
-            if (showingArchiveOnly) {
-                filtered = filtered.filter(n => n.archived);
-            } else {
-                filtered = filtered.filter(n => !n.archived);
-            }
+    function updateReminderBadge() {
+        const activeCount = reminders.filter(r => isReminderActive(r)).length;
+        const badge = document.getElementById('reminderBadge');
+        if (activeCount > 0) {
+            badge.textContent = activeCount;
+            badge.classList.remove('hidden');
+        } else {
+            badge.classList.add('hidden');
+        }
+    }
 
-            const container = document.getElementById('notesList');
-            const sortedNotes = [...filtered].sort((a, b) => {
-                if (a.pinned && !b.pinned) return -1;
-                if (!a.pinned && b.pinned) return 1;
-                return new Date(b.updatedAt) - new Date(a.updatedAt);
+    // Vibrate device (mobile)
+    function vibrateDevice() {
+        if (navigator.vibrate) navigator.vibrate([200,100,200,100,200]);
+    }
+
+    // Check reminders every second
+    function startReminderChecker() {
+        reminderCheckInterval = setInterval(() => {
+            const now = new Date();
+            reminders.forEach(r => {
+                if (r.dismissed) return;
+                const triggerTime = new Date(r.triggerTime);
+                // Trigger when time is reached
+                if (now >= triggerTime) {
+                    // Show notification popup
+                    showNotificationPopup(r);
+                    vibrateDevice();
+                }
             });
+            updateReminderBadge();
+        }, 1000);
+    }
 
-            container.innerHTML = sortedNotes.map(note => {
-                let preview = note.content.substring(0, 50);
-                let titleDisplay = note.title;
+    // Continuous vibration loop while active notifications exist
+    let vibrationLoop = null;
+    function startVibrationLoop() {
+        if (vibrationLoop) return;
+        vibrationLoop = setInterval(() => {
+            const hasActive = reminders.some(r => isReminderActive(r));
+            if (hasActive) vibrateDevice();
+            else { clearInterval(vibrationLoop); vibrationLoop = null; }
+        }, 2500);
+    }
+
+    let currentNotifReminder = null;
+    function showNotificationPopup(r) {
+        if (currentNotifReminder && currentNotifReminder.id === r.id) return; // already showing
+        currentNotifReminder = r;
+        document.getElementById('npTitle').textContent = '🔔 ' + r.title;
+        const triggerDate = new Date(r.triggerTime);
+        document.getElementById('npTime').textContent = triggerDate.toLocaleDateString() + ' ' + triggerDate.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+        document.getElementById('npDesc').textContent = r.desc || '';
+        document.getElementById('notificationPopup').classList.add('show');
+        startVibrationLoop();
+    }
+
+    function dismissNotification() {
+        if (currentNotifReminder) {
+            currentNotifReminder.dismissed = true;
+            saveReminders(); updateReminderBadge();
+            currentNotifReminder = null;
+        }
+        document.getElementById('notificationPopup').classList.remove('show');
+        // Check if any active reminders remain
+        const hasActive = reminders.some(r => isReminderActive(r));
+        if (hasActive) {
+            // Show next active reminder
+            const next = reminders.find(r => isReminderActive(r));
+            if (next) showNotificationPopup(next);
+        }
+    }
+
+    // ============================================================
+    // LOCK / UNLOCK
+    // ============================================================
+    function showLockModal() {
+        if (!currentNoteId) { showToast(translations[currentLang].selectNote); return; }
+        document.getElementById('lockModal').classList.add('active');
+        document.getElementById('lockPassword').value=''; document.getElementById('lockPasswordConfirm').value='';
+        document.getElementById('lockError').classList.remove('show');
+    }
+    function closeLockModal() { document.getElementById('lockModal').classList.remove('active'); }
+    function setLock() {
+        const p=document.getElementById('lockPassword').value, c=document.getElementById('lockPasswordConfirm').value;
+        if(p!==c){document.getElementById('lockError').textContent=translations[currentLang].passwordsDontMatch;document.getElementById('lockError').classList.add('show');return;}
+        if(!p){document.getElementById('lockError').textContent=translations[currentLang].fillAllFields;document.getElementById('lockError').classList.add('show');return;}
+        const n=notes.find(n=>n.id===currentNoteId);
+        if(n){n.locked=true;n.lockPassword=p;saveNotes();renderNotesList();closeLockModal();showToast(translations[currentLang].noteLocked);clearEditor();}
+    }
+    function closeUnlockModal(){document.getElementById('unlockModal').classList.remove('active');document.getElementById('unlockError').classList.remove('show');}
+    function unlockNote(){
+        const p=document.getElementById('unlockPassword').value;
+        const n=notes.find(n=>n.id===currentNoteId);
+        if(n&&n.lockPassword===p){
+            closeUnlockModal();
+            document.getElementById('noteTitle').value=n.title;
+            document.getElementById('noteContent').value=n.content;
+            document.getElementById('noteTitle').disabled=false;
+            document.getElementById('noteContent').disabled=false;
+            document.getElementById('saveBtn').disabled=false;
+            document.getElementById('currentColor').style.background=n.color;
+            document.getElementById('noteContent').style.background=n.color;
+            updateWordCount(); showToast(translations[currentLang].noteUnlocked);
+        } else { document.getElementById('unlockError').classList.add('show'); }
+    }
+
+    // ============================================================
+    // TAGS
+    // ============================================================
+    function showTagModal(){
+        if(!currentNoteId){showToast(translations[currentLang].selectNote);return;}
+        const n=notes.find(n=>n.id===currentNoteId);
+        document.getElementById('tagInput').value=n.tags?n.tags.join(', '):'';
+        document.getElementById('currentTags').textContent=n.tags&&n.tags.length>0?n.tags.join(', '):'None';
+        document.getElementById('tagModal').classList.add('active');
+    }
+    function closeTagModal(){document.getElementById('tagModal').classList.remove('active');}
+    function saveTags(){
+        const n=notes.find(n=>n.id===currentNoteId);
+        if(n){n.tags=document.getElementById('tagInput').value.split(',').map(t=>t.trim()).filter(t=>t);saveNotes();closeTagModal();showToast(translations[currentLang].tagsUpdated);}
+    }
+
+    // ============================================================
+    // HISTORY
+    // ============================================================
+    function showHistory(){
+        const c=document.getElementById('historyContent');
+        if(activityLog.length===0){
+            c.innerHTML='<p style="color:#6c757d;text-align:center;padding:20px;">No activity recorded yet</p>';
+        } else {
+            c.innerHTML = activityLog.map((log, i) => {
+                const time = new Date(log.timestamp).toLocaleString();
+                let icon = '';
+                let color = '';
+                let detail = '';
                 
-                // Highlight search term in yellow
-                if (query) {
-                    const regex = new RegExp(`(${query})`, 'gi');
-                    preview = preview.replace(regex, '<span class="highlight">$1</span>');
-                    titleDisplay = titleDisplay.replace(regex, '<span class="highlight">$1</span>');
+                if (log.action === 'DELETE') {
+                    icon = '🗑️';
+                    color = '#dc3545';
+                    detail = `<strong>Deleted:</strong> ${log.details.title}<br><small>By: ${log.details.author}</small><br><small>${log.details.content}</small>`;
+                } else if (log.action === 'CREATE') {
+                    icon = '➕';
+                    color = '#28a745';
+                    detail = `<strong>Created:</strong> ${log.details.title}`;
+                } else if (log.action === 'EDIT') {
+                    icon = '✏️';
+                    color = '#17a2b8';
+                    detail = `<strong>Edited:</strong> ${log.details.title}`;
+                } else if (log.action === 'ARCHIVE') {
+                    icon = '📦';
+                    color = '#6c757d';
+                    detail = `<strong>Archived:</strong> ${log.details.title}`;
                 }
                 
-                const date = new Date(note.updatedAt).toLocaleDateString();
-                return `
-                    <div class="note-item ${note.id === currentNoteId ? 'active' : ''} ${note.archived ? 'archived' : ''}" 
-                         onclick="selectNote(${note.id})"
-                         style="background: ${note.color};">
-                        <div class="note-icons">
-                            <button class="note-icon-btn" onclick="event.stopPropagation(); togglePinFromList(${note.id})">
-                                ${note.pinned ? '📍' : '📌'}
-                            </button>
-                            <button class="note-icon-btn" onclick="event.stopPropagation(); toggleFavoriteFromList(${note.id})">
-                                ${note.favorite ? '⭐' : '☆'}
-                            </button>
-                            ${note.locked ? '<span>🔒</span>' : ''}
-                        </div>
-                        <h3>${titleDisplay}</h3>
-                        <p>${preview}${note.content.length > 50 ? '...' : ''}</p>
-                        <div class="note-meta">
-                            <span>👤 ${note.author}</span>
-                            <span>📅 ${date}</span>
-                        </div>
-                        <div class="note-actions">
-                            <button class="note-action-btn note-action-edit" onclick="event.stopPropagation(); editNote(${note.id})">
-                                ${translations[currentLang].edit}
-                            </button>
-                            <button class="note-action-btn note-action-delete" onclick="event.stopPropagation(); deleteNoteFromList(${note.id})">
-                                ${translations[currentLang].delete}
-                            </button>
-                            <button class="note-action-btn note-action-archive" onclick="event.stopPropagation(); toggleArchive(${note.id})">
-                                ${note.archived ? '📤' : '📦'}
-                            </button>
-                        </div>
+                return `<div class="history-item" style="border-left: 3px solid ${color}; cursor: default;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px;">
+                        <span style="font-size: 18px;">${icon}</span>
+                        <div class="history-time">${time}</div>
                     </div>
-                `;
+                    <div style="font-size: 13px; color: #495057;">${detail}</div>
+                </div>`;
             }).join('');
         }
+        document.getElementById('historyModal').classList.add('active');
+    }
+    function closeHistoryModal(){document.getElementById('historyModal').classList.remove('active');}
+    function restoreVersion(i){
+        const n=notes.find(n=>n.id===currentNoteId);
+        if(n&&n.history[i]){document.getElementById('noteTitle').value=n.history[i].title;document.getElementById('noteContent').value=n.history[i].content;updateWordCount();closeHistoryModal();showToast('📜 Version restored!');}
+    }
 
-        function showCalendar() {
-            const calendarContent = document.getElementById('calendarContent');
-            const now = new Date();
-            const year = now.getFullYear();
-            const month = now.getMonth();
-            
-            const notesByDate = {};
-            notes.forEach(note => {
-                const date = new Date(note.updatedAt).toDateString();
-                if (!notesByDate[date]) notesByDate[date] = [];
-                notesByDate[date].push(note);
-            });
+    // ============================================================
+    // COLOR
+    // ============================================================
+    function toggleColorPicker(){document.getElementById('colorOptions').classList.toggle('active');}
+    function setNoteColor(color){
+        if(!currentNoteId)return;
+        const n=notes.find(n=>n.id===currentNoteId);
+        if(n){n.color=color;document.getElementById('currentColor').style.background=color;document.getElementById('noteContent').style.background=color;saveNotes();renderNotesList();toggleColorPicker();}
+    }
 
-            const firstDay = new Date(year, month, 1).getDay();
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
-            
-            let calendarHTML = `<div style="font-size: 18px; font-weight: 700; text-align: center; margin-bottom: 20px;">${now.toLocaleString('default', { month: 'long' })} ${year}</div>`;
-            calendarHTML += '<div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px;">';
-            
-            ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].forEach(day => {
-                calendarHTML += `<div style="font-weight: 600; text-align: center; padding: 10px;">${day}</div>`;
-            });
-
-            for (let i = 0; i < firstDay; i++) {
-                calendarHTML += '<div></div>';
-            }
-
-            for (let day = 1; day <= daysInMonth; day++) {
-                const date = new Date(year, month, day);
-                const dateStr = date.toDateString();
-                const hasNotes = notesByDate[dateStr];
-                const count = hasNotes ? hasNotes.length : 0;
-
-                calendarHTML += `
-                    <div style="padding: 10px; text-align: center; border: 1px solid #e9ecef; border-radius: 5px; cursor: pointer; ${hasNotes ? 'background: #d4edda;' : ''}">
-                        <div style="font-weight: 600;">${day}</div>
-                        ${count > 0 ? `<div style="font-size: 10px; color: #28a745;">${count}</div>` : ''}
+    // ============================================================
+    // PRINT NOTE
+    // ============================================================
+    function printNote(){
+        if(!currentNoteId){showToast(translations[currentLang].selectNote);return;}
+        const n=notes.find(n=>n.id===currentNoteId);
+        if(n){
+            const w=window.open('','_blank');
+            w.document.write(`<html><head><title>${n.title}</title><style>
+                body{font-family:Arial;padding:40px;}
+                .frame{border:3px solid #667eea;border-radius:12px;max-width:700px;margin:0 auto;overflow:hidden;}
+                .frame-header{background:#667eea;color:white;padding:18px 24px;}
+                .frame-header h1{margin:0;font-size:22px;}
+                .frame-header .meta{font-size:12px;opacity:0.85;margin-top:6px;}
+                .frame-body{padding:24px;}
+                .content{line-height:1.8;white-space:pre-wrap;font-size:14px;}
+            </style></head><body>
+                <div class="frame">
+                    <div class="frame-header">
+                        <h1>${n.title}</h1>
+                        <div class="meta">👤 ${n.author} &nbsp;|&nbsp; 📅 ${new Date(n.createdAt).toLocaleString()}</div>
                     </div>
-                `;
-            }
-
-            calendarHTML += '</div>';
-            calendarContent.innerHTML = calendarHTML;
-            document.getElementById('calendarModal').classList.add('active');
+                    <div class="frame-body"><div class="content">${n.content}</div></div>
+                </div>
+            </body></html>`);
+            w.document.close(); w.print();
         }
+    }
 
-        function closeCalendarModal() {
-            document.getElementById('calendarModal').classList.remove('active');
+    // ============================================================
+    // PDF EXPORT
+    // ============================================================
+    function exportToPDF(){
+        if(!currentNoteId){showToast(translations[currentLang].selectNote);return;}
+        const n=notes.find(n=>n.id===currentNoteId);
+        if(n&&typeof jspdf!=='undefined'){
+            const{jsPDF}=window.jspdf;const doc=new jsPDF();
+            doc.setFontSize(20);doc.text(n.title,20,20);
+            doc.setFontSize(12);doc.text(`Author: ${n.author}`,20,35);doc.text(`Date: ${new Date(n.updatedAt).toLocaleString()}`,20,45);
+            doc.setFontSize(11);doc.text(doc.splitTextToSize(n.content,170),20,60);
+            doc.save(`${n.title}.pdf`);showToast(translations[currentLang].pdfExported);
         }
+    }
 
-        function updateWordCount() {
-            const content = document.getElementById('noteContent').value;
-            const words = content.trim().split(/\s+/).filter(word => word.length > 0).length;
-            const chars = content.length;
-            document.getElementById('wordCount').textContent = words;
-            document.getElementById('charCount').textContent = chars;
+    // ============================================================
+    // DUPLICATE
+    // ============================================================
+    function duplicateNote(){
+        if(!currentNoteId){showToast(translations[currentLang].selectNote);return;}
+        const n=notes.find(n=>n.id===currentNoteId);
+        if(n){
+            const d={...n,id:Date.now(),title:n.title+' (Copy)',createdAt:new Date().toISOString(),updatedAt:new Date().toISOString(),pinned:false,locked:false,lockPassword:''};
+            notes.unshift(d);saveNotes();renderNotesList();selectNote(d.id,true);
         }
+    }
 
-        function updateStats() {
-            document.getElementById('totalNotes').textContent = notes.filter(n => !n.archived).length;
-            const favorites = notes.filter(n => n.favorite).length;
-            document.getElementById('totalFavorites').textContent = favorites;
-            const totalWords = notes.reduce((sum, note) => {
-                const words = note.content.trim().split(/\s+/).filter(word => word.length > 0).length;
-                return sum + words;
-            }, 0);
-            document.getElementById('totalWords').textContent = totalWords;
-            
-            if (notes.length > 0) {
-                const latest = notes.reduce((a, b) => new Date(a.updatedAt) > new Date(b.updatedAt) ? a : b);
-                document.getElementById('lastUpdated').textContent = new Date(latest.updatedAt).toLocaleDateString();
-            } else {
-                document.getElementById('lastUpdated').textContent = translations[currentLang].never;
-            }
-        }
+    // ============================================================
+    // EXPORT / IMPORT
+    // ============================================================
+    function exportAllNotes(){
+        if(!notes.length)return;
+        const blob=new Blob([JSON.stringify(notes,null,2)],{type:'application/json'});
+        const url=URL.createObjectURL(blob);const a=document.createElement('a');
+        a.href=url;a.download=`shiftnote-backup-${Date.now()}.json`;a.click();URL.revokeObjectURL(url);
+        showToast(translations[currentLang].allNotesExported);
+    }
+    function showImportModal(){document.getElementById('importModal').classList.add('active');document.getElementById('importPassword').value='';document.getElementById('importError').classList.remove('show');}
+    function closeImportModal(){document.getElementById('importModal').classList.remove('active');}
+    function confirmImport(){
+        if(document.getElementById('importPassword').value!=='4067'){document.getElementById('importError').classList.add('show');return;}
+        document.getElementById('importFile').click();
+    }
 
-        function showToast(message) {
-            if (!message) return;
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
+    // ============================================================
+    // SEARCH (with vibrating "start" word)
+    // ============================================================
+    function searchNotes(){
+        const query=document.getElementById('searchInput').value.toLowerCase();
 
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-            const isDark = document.body.classList.contains('dark-mode');
-            localStorage.setItem('darkMode', isDark);
-        }
+        // Vibrate on any search input
+        if(navigator.vibrate && query) navigator.vibrate(50);
 
-        let autoSaveTimeout;
-        ['noteTitle', 'noteContent'].forEach(id => {
-            document.getElementById(id).addEventListener('input', () => {
-                if (id === 'noteContent') {
-                    updateWordCount();
+        const authorFilter=document.getElementById('authorFilter').value;
+        let filtered=notes.filter(n=>n.title.toLowerCase().includes(query)||n.content.toLowerCase().includes(query)||n.author.toLowerCase().includes(query));
+        if(authorFilter) filtered=filtered.filter(n=>n.author===authorFilter);
+        if(showingFavoritesOnly) filtered=filtered.filter(n=>n.favorite&&!n.archived);
+        if(showingArchiveOnly) filtered=filtered.filter(n=>n.archived);
+        else filtered=filtered.filter(n=>!n.archived);
+
+        const sorted=[...filtered].sort((a,b)=>{if(a.pinned&&!b.pinned)return -1;if(!a.pinned&&b.pinned)return 1;return new Date(b.updatedAt)-new Date(a.updatedAt);});
+        const container=document.getElementById('notesList');
+
+        container.innerHTML=sorted.map(note=>{
+            let preview=note.content.substring(0,80);
+            let titleDisplay=note.title;
+
+            if(query){
+                // Special: if "start" is in the query, make it vibrate
+                const isStartQuery = query.includes('start');
+
+                if(isStartQuery){
+                    // Vibrate "start" occurrences
+                    preview = preview.replace(/start/gi, '<span class="vibrate-word">$&</span>');
+                    titleDisplay = titleDisplay.replace(/start/gi, '<span class="vibrate-word">$&</span>');
                 }
-                clearTimeout(autoSaveTimeout);
-                autoSaveTimeout = setTimeout(() => {
-                    if (currentNoteId) {
-                        saveCurrentNote();
-                    }
-                }, 2000);
+
+                // General highlight for all query terms
+                const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                const regex=new RegExp(`(${escapedQuery})`, 'gi');
+                if(!isStartQuery){
+                    preview=preview.replace(regex,'<span class="highlight">$1</span>');
+                    titleDisplay=titleDisplay.replace(regex,'<span class="highlight">$1</span>');
+                }
+            }
+
+            const date=new Date(note.updatedAt).toLocaleDateString();
+            return `<div class="note-item ${note.id===currentNoteId?'active':''} ${note.archived?'archived':''}"
+                onclick="selectNote(${note.id})" style="background:${note.color};">
+                <div class="note-icons">
+                    <button class="note-icon-btn" onclick="event.stopPropagation();togglePinFromList(${note.id})">${note.pinned?'📍':'📌'}</button>
+                    <button class="note-icon-btn" onclick="event.stopPropagation();toggleFavoriteFromList(${note.id})">${note.favorite?'⭐':'☆'}</button>
+                    ${note.locked?'<span>🔒</span>':''}
+                </div>
+                <h3>${titleDisplay}</h3>
+                <p>${preview}${note.content.length>80?'...':''}</p>
+                <div class="note-meta"><span>👤 ${note.author}</span><span>📅 ${date}</span></div>
+                <div class="note-actions">
+                    <button class="note-action-btn note-action-edit" onclick="event.stopPropagation();editNote(${note.id})">${translations[currentLang].edit}</button>
+                    <button class="note-action-btn note-action-delete" onclick="event.stopPropagation();deleteNoteFromList(${note.id})">${translations[currentLang].delete}</button>
+                    <button class="note-action-btn note-action-archive" onclick="event.stopPropagation();toggleArchive(${note.id})">${translations[currentLang].archive}</button>
+                </div>
+            </div>`;
+        }).join('');
+    }
+
+    // ============================================================
+    // CALENDAR
+    // ============================================================
+    function showCalendar(){
+        const c=document.getElementById('calendarContent');const now=new Date();const y=now.getFullYear(),m=now.getMonth();
+        const notesByDate={};notes.forEach(n=>{const d=new Date(n.updatedAt).toDateString();if(!notesByDate[d])notesByDate[d]=[];notesByDate[d].push(n);});
+        const firstDay=new Date(y,m,1).getDay();const daysInMonth=new Date(y,m+1,0).getDate();
+        let html=`<div style="font-size:18px;font-weight:700;text-align:center;margin-bottom:20px;">${now.toLocaleString('default',{month:'long'})} ${y}</div>`;
+        html+='<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;">';
+        ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].forEach(d=>{html+=`<div style="font-weight:600;text-align:center;padding:10px;">${d}</div>`;});
+        for(let i=0;i<firstDay;i++)html+='<div></div>';
+        for(let d=1;d<=daysInMonth;d++){const date=new Date(y,m,d);const hasNotes=notesByDate[date.toDateString()];const count=hasNotes?hasNotes.length:0;html+=`<div style="padding:10px;text-align:center;border:1px solid #e9ecef;border-radius:5px;${hasNotes?'background:#d4edda;':''}">${d}${count>0?`<div style="font-size:10px;color:#28a745;">${count}</div>`:''}</div>`;}
+        html+='</div>';c.innerHTML=html;document.getElementById('calendarModal').classList.add('active');
+    }
+    function closeCalendarModal(){document.getElementById('calendarModal').classList.remove('active');}
+
+    // ============================================================
+    // SHIFT NOTE
+    // ============================================================
+    const shifts = {
+        morning: { label: { en:'Morning Shift', it:'Turno Mattina' }, time:'06:00 – 14:00' },
+        afternoon: { label: { en:'Afternoon Shift', it:'Turno Pomeriggio' }, time:'14:00 – 22:00' },
+        night: { label: { en:'Night Shift', it:'Turno Notte' }, time:'22:00 – 06:00' }
+    };
+
+    function openShiftNote() {
+        selectedShift = null;
+        document.getElementById('shiftLabel').textContent = currentLang==='en'?'Select a shift':'Seleziona un turno';
+        document.getElementById('shiftTimeDisplay').textContent = '–';
+        document.getElementById('shiftLeaderName').value = '';
+        document.getElementById('shiftNoteContent').value = '';
+        document.querySelectorAll('.shift-pick-btn').forEach(b=>b.classList.remove('selected'));
+        document.getElementById('shiftNoteModal').classList.add('active');
+    }
+
+    function pickShift(type) {
+        selectedShift = type;
+        document.querySelectorAll('.shift-pick-btn').forEach(b=>b.classList.remove('selected'));
+        event.target.closest('.shift-pick-btn').classList.add('selected');
+        document.getElementById('shiftLabel').textContent = shifts[type].label[currentLang];
+        document.getElementById('shiftTimeDisplay').textContent = shifts[type].time;
+    }
+
+    function closeShiftNote() { document.getElementById('shiftNoteModal').classList.remove('active'); }
+
+    // Auto-numbering for shift note textarea
+    document.addEventListener('DOMContentLoaded', function() {
+        const shiftTextarea = document.getElementById('shiftNoteContent');
+        if (shiftTextarea) {
+            let lineNumber = 1;
+            
+            shiftTextarea.addEventListener('focus', function() {
+                if (this.value === '') {
+                    this.value = '1. ';
+                    lineNumber = 1;
+                }
             });
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
-                e.preventDefault();
-                saveCurrentNote();
-            }
-            if ((e.ctrlKey || e.metaKey) && e.key === 'n') {
-                e.preventDefault();
-                showNewNoteModal();
-            }
-        });
-
-        document.getElementById('deletePassword').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') confirmDelete();
-        });
-
-        document.getElementById('importPassword').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') confirmImport();
-        });
-
-        document.getElementById('newNoteTitle').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') createNoteWithDetails();
-        });
-
-        // Close dropdown when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.language-switcher')) {
-                document.getElementById('langDropdown').classList.remove('active');
-            }
-        });
-
-        loadNotes();
-        
-        if (localStorage.getItem('darkMode') === 'true') {
-            document.body.classList.add('dark-mode');
+            
+            shiftTextarea.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    lineNumber++;
+                    const cursorPos = this.selectionStart;
+                    const textBefore = this.value.substring(0, cursorPos);
+                    const textAfter = this.value.substring(cursorPos);
+                    this.value = textBefore + '\n' + lineNumber + '. ' + textAfter;
+                    this.selectionStart = this.selectionEnd = cursorPos + ('\n' + lineNumber + '. ').length;
+                }
+            });
         }
+    });
 
-        const savedLang = localStorage.getItem('language');
-        if (savedLang) {
-            switchLanguage(savedLang);
+    // View saved shift notes function
+    function viewShiftNotes() {
+        const shiftNotes = notes.filter(n => n.isShiftNote);
+        if (shiftNotes.length === 0) {
+            showToast(currentLang === 'en' ? '📋 No shift notes found' : '📋 Nessuna nota turno trovata');
+            return;
         }
         
-        // Initialize button states
-        updateFavoritesButton();
-        updateArchiveButton();
+        // Filter to show only shift notes
+        showingShiftNotesOnly = true;
+        document.getElementById('authorFilter').value = '';
+        showingFavoritesOnly = false;
+        showingArchiveOnly = false;
+        
+        // Update favorites button to show "Back to All Notes"
+        const btn = document.getElementById('favoritesBtn');
+        btn.className = 'btn btn-back';
+        btn.innerHTML = `<span>◀</span><span data-lang="backToAll">${translations[currentLang].backToAll}</span>`;
+        
+        renderNotesList();
+        showToast(currentLang === 'en' ? '🏭 Showing shift notes' : '🏭 Mostrando note turno');
+    }
+
+    function saveShiftNote() {
+        const leader = document.getElementById('shiftLeaderName').value.trim();
+        const content = document.getElementById('shiftNoteContent').value.trim();
+        if (!selectedShift) { showToast('⚠️ ' + (currentLang==='en'?'Select a shift first':'Seleziona prima un turno')); return; }
+        if (!leader) { showToast('⚠️ ' + (currentLang==='en'?'Enter team leader name':'Inserisci nome capo turno')); return; }
+
+        const shiftInfo = shifts[selectedShift];
+        const shiftContent = `🏭 IRCA — ${shiftInfo.label[currentLang]}\n⏰ ${shiftInfo.time}\n👤 Team Leader: ${leader}\n${'─'.repeat(40)}\n${content}`;
+
+        const note = {
+            id: Date.now(), author: leader,
+            title: `[IRCA] ${shiftInfo.label[currentLang]} — ${new Date().toLocaleDateString()}`,
+            content: shiftContent,
+            createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(),
+            tags:['IRCA','shift'], favorite:false, pinned:false, archived:false,
+            color:'#d1ecf1', locked:false, lockPassword:'', history:[],
+            isShiftNote: true, shiftType: selectedShift, shiftLeader: leader
+        };
+
+        notes.unshift(note); saveNotes(); renderNotesList(); closeShiftNote();
+        showToast(translations[currentLang].shiftSaved);
+    }
+
+    function printShiftNote() {
+        const leader = document.getElementById('shiftLeaderName').value.trim();
+        const content = document.getElementById('shiftNoteContent').value;
+        if (!selectedShift) { showToast('⚠️ Select a shift'); return; }
+
+        const shiftInfo = shifts[selectedShift];
+        const today = new Date();
+        const dateStr = `${today.getDate()}/${today.getMonth()+1}/${today.getFullYear()}`;
+        
+        const w = window.open('','_blank');
+        w.document.write(`<html><head><title>IRCA - REGISTRO GIORNALIERO</title><style>
+            * { margin: 0; padding: 0; box-sizing: border-box; }
+            body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+            .page {
+                max-width: 800px; margin: 0 auto; background: white;
+                border: 2px solid #000; page-break-after: always;
+            }
+            .header {
+                border-bottom: 2px solid #000;
+                display: grid;
+                grid-template-columns: 1fr 2fr 1fr;
+                align-items: center;
+                padding: 15px 20px;
+            }
+            .logo-section {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .company-logo { 
+                color: #8B7355; 
+                font-size: 32px; 
+                font-weight: 900; 
+                letter-spacing: 6px;
+                font-family: Georgia, serif;
+            }
+            .since { font-size: 10px; color: #666; letter-spacing: 3px; margin-top: 2px; }
+            .registro {
+                text-align: center;
+                font-weight: 700;
+                font-size: 13px;
+                line-height: 1.4;
+            }
+            .date-field {
+                text-align: right;
+                font-size: 12px;
+                font-weight: 600;
+            }
+            .shift-bar {
+                background: #f0f0f0;
+                border-bottom: 2px solid #000;
+                padding: 8px 20px;
+                text-align: center;
+                font-weight: 700;
+                font-size: 14px;
+            }
+            .content-area {
+                padding: 20px;
+                min-height: 600px;
+            }
+            .note-label {
+                font-weight: 700;
+                font-size: 13px;
+                margin-bottom: 10px;
+            }
+            .note-text {
+                line-height: 2;
+                font-size: 16px;
+                white-space: pre-wrap;
+                font-family: Arial, sans-serif;
+            }
+            .leader-info {
+                margin-top: 20px;
+                padding-top: 10px;
+                border-top: 1px dashed #ccc;
+                font-size: 13px;
+                color: #666;
+            }
+            @media print {
+                body { background: white; padding: 0; }
+                .page { border: 2px solid #000; }
+            }
+        </style></head><body>
+            <div class="page">
+                <div class="header">
+                    <div class="logo-section">
+                        <div class="company-logo">irca</div>
+                        <div class="since">SINCE 1919</div>
+                    </div>
+                    <div class="registro">
+                        REGISTRO GIORNALIERO<br>
+                        REPARTO 40 - CREME GB
+                    </div>
+                    <div class="date-field">
+                        DATA: ___/___/___
+                    </div>
+                </div>
+                <div class="shift-bar">
+                    ${shiftInfo.label[currentLang]} - ${shiftInfo.time}
+                </div>
+                <div class="content-area">
+                    <div class="note-label">NOTE:</div>
+                    <div class="note-text">${content}</div>
+                    ${leader ? `<div class="leader-info">Team Leader: <strong>${leader}</strong> | Data: ${dateStr}</div>` : ''}
+                </div>
+            </div>
+        </body></html>`);
+        w.document.close(); w.print();
+    }
+
+    // ============================================================
+    // WORD COUNT
+    // ============================================================
+    function updateWordCount(){
+        const c=document.getElementById('noteContent').value;
+        document.getElementById('wordCount').textContent=c.trim().split(/\s+/).filter(w=>w.length>0).length;
+        document.getElementById('charCount').textContent=c.length;
+    }
+
+    // ============================================================
+    // STATS
+    // ============================================================
+    function updateStats(){
+        document.getElementById('totalNotes').textContent=notes.filter(n=>!n.archived).length;
+        document.getElementById('totalFavorites').textContent=notes.filter(n=>n.favorite).length;
+        document.getElementById('totalWords').textContent=notes.reduce((s,n)=>s+n.content.trim().split(/\s+/).filter(w=>w.length>0).length,0);
+        if(notes.length>0){const l=notes.reduce((a,b)=>new Date(a.updatedAt)>new Date(b.updatedAt)?a:b);document.getElementById('lastUpdated').textContent=new Date(l.updatedAt).toLocaleDateString();}
+        else document.getElementById('lastUpdated').textContent=translations[currentLang].never;
+    }
+
+    // ============================================================
+    // TOAST
+    // ============================================================
+    function showToast(msg){
+        if(!msg)return;const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+        setTimeout(()=>t.classList.remove('show'),3000);
+    }
+
+    // ============================================================
+    // DARK MODE
+    // ============================================================
+    function toggleDarkMode(){document.body.classList.toggle('dark-mode');localStorage.setItem('darkMode',document.body.classList.contains('dark-mode'));}
+
+    // ============================================================
+    // KEYBOARD SHORTCUTS (NO auto-save)
+    // ============================================================
+    document.addEventListener('keydown',e=>{
+        if((e.ctrlKey||e.metaKey)&&e.key==='s'){e.preventDefault();saveCurrentNote();}
+        if((e.ctrlKey||e.metaKey)&&e.key==='n'){e.preventDefault();showNewNoteModal();}
+    });
+
+    // Word count update on input (no auto-save)
+    document.getElementById('noteContent').addEventListener('input', updateWordCount);
+
+    document.getElementById('deletePassword').addEventListener('keypress',e=>{if(e.key==='Enter')confirmDelete();});
+    document.getElementById('importPassword').addEventListener('keypress',e=>{if(e.key==='Enter')confirmImport();});
+    document.getElementById('newNoteTitle').addEventListener('keypress',e=>{if(e.key==='Enter')createNoteWithDetails();});
+
+    // Close language dropdown on outside click
+    document.addEventListener('click',e=>{if(!e.target.closest('.language-switcher'))document.getElementById('langDropdown').classList.remove('active');});
+
+    // Import file handler
+    document.addEventListener('DOMContentLoaded',()=>{
+        document.getElementById('importFile').addEventListener('change',e=>{
+            const f=e.target.files[0];if(!f)return;
+            const r=new FileReader();
+            r.onload=ev=>{try{notes=JSON.parse(ev.target.result);saveNotes();renderNotesList();closeImportModal();showToast(translations[currentLang].notesImported);}catch(err){showToast('❌ Invalid file');}};
+            r.readAsText(f);e.target.value='';
+        });
+    });
+
+    // ============================================================
+    // INIT
+    // ============================================================
+    loadNotes();
+    if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark-mode');
+    const savedLang=localStorage.getItem('language');
+    if(savedLang) switchLanguage(savedLang);
+    updateFavoritesButton(); updateArchiveButton();
+    startReminderChecker();
     </script>
 </body>
 </html>
